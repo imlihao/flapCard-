@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { E_CardStatus } from "./EnumDefines";
+import { E_CardStatus } from "./Defines";
 import { MessageCenter } from "./MessageCenter";
 
 const { ccclass, property } = cc._decorator;
