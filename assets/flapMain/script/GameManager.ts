@@ -39,6 +39,7 @@ export default class GameManager extends cc.Component {
 
     private cardNodes: cc.Node[];
 
+
     start() {
         console.log("GameDataRegistered");
         GameManager.inst = this;
