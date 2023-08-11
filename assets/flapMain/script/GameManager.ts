@@ -9,6 +9,7 @@
  * 
  */
 
+import GComCard from "./GComCard";
 import { MathUtil } from "./MathUtil";
 import { LogUtil } from "./logUtil";
 
@@ -20,7 +21,8 @@ const { ccclass, property } = cc._decorator;
  *  -- 更新card状态
  * 
  * 管理游戏状态
- *  -- score
+ *  -- score变化
+ *  -- 胜负
  */
 @ccclass
 export default class GameManager extends cc.Component {
@@ -34,6 +36,8 @@ export default class GameManager extends cc.Component {
     cardPfb: cc.Prefab = null;
 
     private idArr: number[];
+
+    private cardNodes: cc.Node[];
 
     start() {
         console.log("GameDataRegistered");
@@ -58,8 +62,13 @@ export default class GameManager extends cc.Component {
 
     initData() {
         this.generateIds(this.maxPair);
+
+        this.cardNodes = [];
         for (let i = 0; i < this.idArr.length; ++i) {
-            
+            let cardNode = cc.instantiate(this.cardPfb);
+            cardNode.getComponent(GComCard).initData(this.idArr[i], i);
+            LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
+            this.cardNodes.push(cardNode);
         }
     }
 
