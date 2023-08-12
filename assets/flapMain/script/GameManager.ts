@@ -11,6 +11,7 @@
 
 import GComCard from "./GComCard";
 import { MathUtil } from "./MathUtil";
+import PlayerData from "./PlayerData";
 import { LogUtil } from "./logUtil";
 
 const { ccclass, property } = cc._decorator;
@@ -39,11 +40,15 @@ export default class GameManager extends cc.Component {
 
     private cardNodes: cc.Node[];
 
-
     start() {
         console.log("GameDataRegistered");
         GameManager.inst = this;
     }
+
+    public playerA:PlayerData;
+    
+    public playerB:PlayerData;
+    
 
     /**
      * 生成card的id和顺序
@@ -62,6 +67,7 @@ export default class GameManager extends cc.Component {
     }
 
     initData() {
+        //初始化拍组
         this.generateIds(this.maxPair);
 
         this.cardNodes = [];
@@ -71,6 +77,8 @@ export default class GameManager extends cc.Component {
             LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
             this.cardNodes.push(cardNode);
         }
+
+        //初始化角色
     }
 
     onPair(id: number) {
