@@ -27,7 +27,13 @@ export default class player extends cc.Component {
   
     
     start () {
+        if(this.curHp == 0){
+            this.curHp = this.maxHp;
+        }
 
+        if(this.maxBullet == 0){
+            this.maxBullet = this.maxHp;
+        }
     }
 
     // update (dt) {}
