@@ -15,5 +15,5 @@ export default class PlayerData {
 }
 
 export function CreatePlayData(){
-    return new PlayerData();
+    let data =  new PlayerData();
 }

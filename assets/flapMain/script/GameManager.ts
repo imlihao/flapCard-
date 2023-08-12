@@ -45,9 +45,15 @@ export default class GameManager extends cc.Component {
         GameManager.inst = this;
     }
 
-    public playerA:PlayerData;
+    /**
+     * A 柴
+     */
+    public shibaInuA:PlayerData;
     
-    public playerB:PlayerData;
+    /**
+     * B 柴
+     */
+    public shibaInuB:PlayerData;
     
 
     /**
@@ -79,10 +85,11 @@ export default class GameManager extends cc.Component {
         }
 
         //初始化角色
+        
     }
 
     onPair(id: number) {
-
+        
     }
 
     // update (dt) {}
