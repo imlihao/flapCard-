@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { E_CardStatus } from "./Defines";
+import GameManager from "./GameManager";
 import { MessageCenter } from "./MessageCenter";
 
 const { ccclass, property } = cc._decorator;
@@ -45,7 +46,10 @@ export default class GComCard extends cc.Component {
 
     public changeStatus(newStat: E_CardStatus) {
         //如果状态需要改变的话，播放动画，改状态
-
+        if(newStat != this.status){
+            this.status = newStat;
+            
+        }
     }
 
     private canCardhandleClk(): boolean {
