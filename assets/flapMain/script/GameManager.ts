@@ -9,6 +9,7 @@
  * 
  */
 
+import { E_CardStatus } from "./Defines";
 import GComCard from "./GComCard";
 import { shuffleArray } from "./MathUtil";
 import player from "./Player";
@@ -101,10 +102,25 @@ export default class GameManager extends cc.Component {
 
     }
 
+    depatureCardId:number[] = [];
+    depatureIdxs:number[] = [];
+    
+    lastFlapCard:GComCard;
+    
     onCardClk(idx: number, id: number) {
-        //
-        if (true) {
-
+        if(!this.lastFlapCard){
+           this.lastFlapCard =  this.cardNodes[idx].getComponent(GComCard);
+           this.lastFlapCard.changeStatus(E_CardStatus.tempDisplay);
+        }else{
+            if(this.lastFlapCard.cardId == id){
+                this.lastFlapCard.changeStatus(E_CardStatus.depature);
+                this.cardNodes[idx].getComponent(GComCard).changeStatus(E_CardStatus.depature);
+                this.depatureCardId.push(this.lastFlapCard.cardId);
+                this.depatureIdxs.push(this.lastFlapCard.idx);
+            }else{
+                this.lastFlapCard.changeStatus(E_CardStatus.hidden);
+                this.cardNodes[idx].getComponent(GComCard).changeStatus(E_CardStatus.hidden);
+            }
         }
     }
 
