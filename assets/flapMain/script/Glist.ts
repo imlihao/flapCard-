@@ -12,9 +12,6 @@ export default class GList extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
-    @property(cc.Integer)
-    rows: number = 0;
 
     @property(cc.Integer)
     cols: number = 0;
@@ -25,6 +22,9 @@ export default class GList extends cc.Component {
     @property(cc.Integer)
     marginH: number = 0;
 
+    @property(cc.Integer)
+    skipCnt: number = 0;
+
     start() {
 
     }
@@ -33,19 +33,21 @@ export default class GList extends cc.Component {
         let children = this.node.children;
         if (children.length > 0) {
             const cols = this.cols;
-            const rows = this.rows;
             const marginW = this.marginW;
             const marginH = this.marginH;
             const cellWidth = children[0].width;
             const cellHeight = children[0].height;
             children.forEach((child, index) => {
+                if(this.skipCnt>0 && index>=this.skipCnt){
+                    index+=1;
+                }
                 const row = Math.floor(index / cols);
                 const col = index % cols;
 
                 const x = marginW + col * (cellWidth + marginW);
-                const y = cellHeight + row * (cellHeight + cellHeight);
+                const y = marginH + row * (cellHeight + marginH);
                 child.x = x + cellWidth / 2;
-                child.y = y + cellWidth / 2;
+                child.y = -(y + cellHeight / 2);
             });
         }
     }
