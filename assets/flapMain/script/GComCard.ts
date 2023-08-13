@@ -8,6 +8,7 @@
 import { E_CardStatus } from "./Defines";
 import GameManager from "./GameManager";
 import { MessageCenter } from "./MessageCenter";
+import { LogUtil } from "./logUtil";
 
 const { ccclass, property } = cc._decorator;
 
@@ -56,13 +57,13 @@ export default class GComCard extends cc.Component {
         return true;
     }
 
-    async onCardClk() {
-        if (!this.canCardhandleClk()) {
-            return;
-        }
+    public onCardClk() {
+        LogUtil.logBlue("clkssssss");
         MessageCenter.emit("LockAll", this.cardId);
 
         MessageCenter.emit("CardClk", this.cardId);
+
+        this.node.getComponent(cc.Animation).play("cardFlayout")
     }
 
     start() {
