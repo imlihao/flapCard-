@@ -37,15 +37,15 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Prefab)
     cardPfb: cc.Prefab = null;
-    
+
     @property(cc.Node)
-    cardContainer:cc.Node;
+    cardContainer: cc.Node;
 
     @property(player)
-    shibaInuA:player;
+    shibaInuA: player;
 
     @property(player)
-    shibaInuB:player;
+    shibaInuB: player;
 
     private idArr: number[];
 
@@ -59,7 +59,7 @@ export default class GameManager extends cc.Component {
         } else {
             this.curMovingPlayer = "shibaInuA";
         }
-        LogUtil.logRed("switchPlayer",this.curMovingPlayer);
+        LogUtil.logRed("switchPlayer", this.curMovingPlayer);
     }
 
     start() {
@@ -97,31 +97,43 @@ export default class GameManager extends cc.Component {
             this.cardContainer.addChild(cardNode);
         }
 
-        
+
         //初始化角色
 
     }
 
-    depatureCardId:number[] = [];
-    depatureIdxs:number[] = [];
-    
-    lastFlapCard:GComCard;
-    
+    depatureCardId: number[] = [];
+    depatureIdxs: number[] = [];
+
+    lastFlapCard: GComCard;
+    inComeFlapCard: GComCard;
+
     onCardClk(idx: number, id: number) {
-        if(!this.lastFlapCard){
-           this.lastFlapCard =  this.cardNodes[idx].getComponent(GComCard);
-           this.lastFlapCard.changeStatus(E_CardStatus.tempDisplay);
-        }else{
-            if(this.lastFlapCard.cardId == id){
-                this.lastFlapCard.changeStatus(E_CardStatus.depature);
-                this.cardNodes[idx].getComponent(GComCard).changeStatus(E_CardStatus.depature);
-                this.depatureCardId.push(this.lastFlapCard.cardId);
-                this.depatureIdxs.push(this.lastFlapCard.idx);
-            }else{
-                this.lastFlapCard.changeStatus(E_CardStatus.hidden);
-                this.cardNodes[idx].getComponent(GComCard).changeStatus(E_CardStatus.hidden);
-            }
+        if (!this.lastFlapCard) {
+            this.lastFlapCard = this.cardNodes[idx].getComponent(GComCard);
+            this.lastFlapCard.changeStatus(E_CardStatus.tempDisplay);
+        } else {
+            let inComeCard = this.inComeFlapCard = this.cardNodes[idx].getComponent(GComCard);
+
+            inComeCard.changeStatus(E_CardStatus.tempDisplay);
+            setTimeout(() => {
+                this.onCardSame(idx, id);
+            }, 1000);
         }
+    }
+
+    onCardSame(idx: number, id: number) {
+        if (this.lastFlapCard.cardId == id) {
+            this.lastFlapCard.changeStatus(E_CardStatus.depature);
+            this.inComeFlapCard.changeStatus(E_CardStatus.depature);
+            this.depatureCardId.push(this.lastFlapCard.cardId);
+            this.depatureIdxs.push(this.lastFlapCard.idx);
+        } else {
+            this.lastFlapCard.changeStatus(E_CardStatus.hidden);
+            this.inComeFlapCard.changeStatus(E_CardStatus.hidden);
+        }
+        this.lastFlapCard = null;
+        this.inComeFlapCard = null;
     }
 
     // update (dt) {}
