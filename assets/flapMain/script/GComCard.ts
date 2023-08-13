@@ -67,8 +67,11 @@ export default class GComCard extends cc.Component {
     }
 
     start() {
-
+        console.log("sttss")
+        this.node.on(cc.Node.EventType.TOUCH_END,this.onCardClk,this);
     }
 
-    // update (dt) {}
+    update (dt) {
+        
+    }
 }
