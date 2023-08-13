@@ -815,7 +815,12 @@
     },
     "_enabled": true,
     "maxPair": 12,
-    "cardPfb": null,
+    "cardPfb": {
+      "__uuid__": "466e60de-05c1-4808-a565-941a42909c83"
+    },
+    "cardContainer": {
+      "__id__": 9
+    },
     "shibaInuA": {
       "__id__": 13
     },

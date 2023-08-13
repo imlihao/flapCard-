@@ -36,6 +36,9 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Prefab)
     cardPfb: cc.Prefab = null;
+    
+    @property(cc.Node)
+    cardContainer:cc.Node;
 
     @property(player)
     shibaInuA:player;
@@ -61,6 +64,7 @@ export default class GameManager extends cc.Component {
     start() {
         console.log("GameDataRegistered");
         GameManager.inst = this;
+        this.initData();
     }
 
     /**
@@ -89,7 +93,7 @@ export default class GameManager extends cc.Component {
             cardNode.getComponent(GComCard).initData(this.idArr[i], i);
             LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
             this.cardNodes.push(cardNode);
-            
+            this.cardContainer.addChild(cardNode);
         }
 
         
