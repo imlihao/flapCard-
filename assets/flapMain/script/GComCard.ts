@@ -59,33 +59,30 @@ export default class GComCard extends cc.Component {
             } else {
                 //TODO: 恢复卡片状态
             }
-            
+            this.cardLog(`stat to${E_CardStatus[newStat]}`)
             this.status = newStat;
-            
         }
         
     }
 
-    private canCardhandleClk(): boolean {
-        
-        return true;
-    }
-
     public onCardClk() {
-        LogUtil.logBlue("clkssssss");
-        MessageCenter.emit("LockAll", this.cardId);
-
-        MessageCenter.emit("CardClk", this.cardId);
-
-        
+        if(this.status ==  E_CardStatus.depature){
+            this.cardLog(`depatured`);
+            return;
+        }
+        GameManager.inst.onCardClk(this.idx,this.cardId);
     }
 
     start() {
-        console.log("sttss")
+        this.cardLog("add click")
         this.node.on(cc.Node.EventType.TOUCH_END,this.onCardClk,this);
     }
 
     update (dt) {
         
+    }
+
+    private cardLog(...data:any[]){
+         console.log(`card:idx:${this.idx},cardId:${this.cardId}`,...data);
     }
 }
