@@ -10,7 +10,7 @@
  */
 
 import GComCard from "./GComCard";
-import { MathUtil } from "./MathUtil";
+import { shuffleArray } from "./MathUtil";
 import player from "./Player";
 import PlayerData from "./PlayerData";
 import { LogUtil } from "./logUtil";
@@ -75,7 +75,7 @@ export default class GameManager extends cc.Component {
         }
         LogUtil.log("generate ids:" + arr.toString());
         //乱序
-        this.idArr = MathUtil.shuffleArray<number>(arr);
+        this.idArr = shuffleArray<number>(arr);
         LogUtil.log("after shuffleArray:" + arr.toString());
     }
 
