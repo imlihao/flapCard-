@@ -24,6 +24,9 @@ export default class player extends cc.Component {
 
     @property(cc.Integer)
     curbullet:number = 0;
+
+    @property(cc.Label)
+    debug:cc.Label;
   
     
     start () {
@@ -36,5 +39,17 @@ export default class player extends cc.Component {
         }
     }
 
-    // update (dt) {}
+    onAddHp(addCnt:number){
+        this.curbullet+= addCnt;
+    }
+
+    update (dt) {
+        if(this.debuglabel){
+            let text = `
+            hp:${this.curHp}/${this.maxHp};
+            bullet:${this.curbullet}/${this.maxBullet};
+            `;
+            this.debuglabel.string = text;    
+        }
+    }
 }

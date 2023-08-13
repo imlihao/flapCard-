@@ -45,15 +45,29 @@ export default class GComCard extends cc.Component {
 
     }
 
-    public changeStatus(newStat: E_CardStatus) {
+    async changeStatus(newStat: E_CardStatus,playAni = true) {
         //如果状态需要改变的话，播放动画，改状态
         if(newStat != this.status){
+            if(playAni){
+                if(newStat == E_CardStatus.tempDisplay){
+                    let ani =   this.node.getComponent(cc.Animation).play("cardFlyOut");
+                  }else if(this.status == E_CardStatus.tempDisplay && E_CardStatus.hidden){
+                    this.node.getComponent(cc.Animation).play("cardFlyBack");
+                  }else if(newStat == E_CardStatus.depature){
+                    this.node.getComponent(cc.Animation).playAdditive("cardDissappear");
+                  }
+            } else {
+                //TODO: 恢复卡片状态
+            }
+            
             this.status = newStat;
             
         }
+        
     }
 
     private canCardhandleClk(): boolean {
+        
         return true;
     }
 
@@ -63,7 +77,7 @@ export default class GComCard extends cc.Component {
 
         MessageCenter.emit("CardClk", this.cardId);
 
-        this.node.getComponent(cc.Animation).play("cardFlyout")
+        
     }
 
     start() {
