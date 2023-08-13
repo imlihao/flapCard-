@@ -63,7 +63,7 @@ export default class GComCard extends cc.Component {
 
         MessageCenter.emit("CardClk", this.cardId);
 
-        this.node.getComponent(cc.Animation).play("cardFlayout")
+        this.node.getComponent(cc.Animation).play("cardFlyout")
     }
 
     start() {
