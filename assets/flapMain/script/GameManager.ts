@@ -38,26 +38,30 @@ export default class GameManager extends cc.Component {
     cardPfb: cc.Prefab = null;
 
     @property(player)
+    shibaInuA:player;
+
+    @property(player)
+    shibaInuB:player;
 
     private idArr: number[];
 
     private cardNodes: cc.Node[];
 
+    private curMovingPlayer: "shibaInuA" | "shibaInuB";
+
+    public switchPlayer() {
+        if (this.curMovingPlayer == "shibaInuA") {
+            this.curMovingPlayer = "shibaInuB";
+        } else {
+            this.curMovingPlayer = "shibaInuA";
+        }
+        LogUtil.logRed("switchPlayer",this.curMovingPlayer);
+    }
+
     start() {
         console.log("GameDataRegistered");
         GameManager.inst = this;
     }
-
-    /**
-     * A 柴
-     */
-    public shibaInuA:PlayerData;
-    
-    /**
-     * B 柴
-     */
-    public shibaInuB:PlayerData;
-    
 
     /**
      * 生成card的id和顺序
@@ -85,16 +89,18 @@ export default class GameManager extends cc.Component {
             cardNode.getComponent(GComCard).initData(this.idArr[i], i);
             LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
             this.cardNodes.push(cardNode);
+            
         }
 
-        //初始化角色
         
+        //初始化角色
+
     }
-    
-    onCardClk(idx:number,id: number) {
+
+    onCardClk(idx: number, id: number) {
         //
-        if(true){
-            
+        if (true) {
+
         }
     }
 
