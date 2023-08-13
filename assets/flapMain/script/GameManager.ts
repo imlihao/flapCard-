@@ -117,13 +117,13 @@ export default class GameManager extends cc.Component {
 
             inComeCard.changeStatus(E_CardStatus.tempDisplay);
             setTimeout(() => {
-                this.onCardSame(idx, id);
+                this.onCardSame();
             }, 1000);
         }
     }
 
-    onCardSame(idx: number, id: number) {
-        if (this.lastFlapCard.cardId == id) {
+    onCardSame() {
+        if (this.lastFlapCard.cardId == this.inComeFlapCard.cardId) {
             this.lastFlapCard.changeStatus(E_CardStatus.depature);
             this.inComeFlapCard.changeStatus(E_CardStatus.depature);
             this.depatureCardId.push(this.lastFlapCard.cardId);

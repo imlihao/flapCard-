@@ -46,13 +46,13 @@ export default class GComCard extends cc.Component {
 
     }
 
-    async changeStatus(newStat: E_CardStatus, playAni = true) {
+    public changeStatus(newStat: E_CardStatus, playAni = true) {
         //如果状态需要改变的话，播放动画，改状态
         if (newStat != this.status) {
             if (playAni) {
                 if (newStat == E_CardStatus.tempDisplay) {
                     let ani = this.node.getComponent(cc.Animation).play("cardFlyBack");
-                } else if (this.status == E_CardStatus.tempDisplay && E_CardStatus.hidden) {
+                } else if (this.status == E_CardStatus.tempDisplay &&newStat== E_CardStatus.hidden) {
                     this.node.getComponent(cc.Animation).play("cardFlyOut");
                 } else if (newStat == E_CardStatus.depature) {
                     this.node.getComponent(cc.Animation).playAdditive("cardDisapper");
