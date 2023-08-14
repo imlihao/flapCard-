@@ -109,6 +109,7 @@ export default class GameManager extends cc.Component {
     inComeFlapCard: GComCard;
     lockClk: boolean;
     async onCardClk(idx: number, id: number) {
+        this.lockClk = true;
         if (!this.lastFlapCard) {
             this.lastFlapCard = this.cardNodes[idx].getComponent(GComCard);
             this.lastFlapCard.changeStatus(E_CardStatus.tempDisplay);
@@ -116,10 +117,11 @@ export default class GameManager extends cc.Component {
             let inComeCard = this.inComeFlapCard = this.cardNodes[idx].getComponent(GComCard);
 
             inComeCard.changeStatus(E_CardStatus.tempDisplay);
-            this.lockClk = true;
+            await Deferred.wait(600).promise;
             await this.onCardSame();
+            await this.changeRound();
         }
-        await this.changeRound();
+        this.lockClk = false;
     }
 
     async onCardSame() {
@@ -134,8 +136,7 @@ export default class GameManager extends cc.Component {
         }
         this.lastFlapCard = null;
         this.inComeFlapCard = null;
-        this.lockClk = false;
-        await Deferred.wait(600).promise;
+        await Deferred.wait(400).promise;
     }
 
     async dealBullet() {
@@ -151,6 +152,7 @@ export default class GameManager extends cc.Component {
         //处理风扇
         await this.dealFan();
         await this.dealBullet();
+        this.switchPlayer();
 
     }
 
