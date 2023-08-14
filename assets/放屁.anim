@@ -1,0 +1,59 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "放屁",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5666666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "hunag": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "80fa4b4d-ed21-46d8-b367-bfdf7f733b95"
+                }
+              },
+              {
+                "frame": 0.06666666666666667,
+                "value": {
+                  "__uuid__": "bf57a2f6-fdd8-43b5-b239-303b63f5c16b"
+                }
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": {
+                  "__uuid__": "c2dce047-6286-4839-afea-1dd5042ee408"
+                }
+              },
+              {
+                "frame": 0.21666666666666667,
+                "value": {
+                  "__uuid__": "aef8085f-8242-4761-ad1c-167d66bc21af"
+                }
+              },
+              {
+                "frame": 0.55,
+                "value": {
+                  "__uuid__": "80fa4b4d-ed21-46d8-b367-bfdf7f733b95"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.21666666666666667,
+      "func": "",
+      "params": []
+    }
+  ]
+}
