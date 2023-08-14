@@ -71,6 +71,10 @@ export default class GComCard extends cc.Component {
             this.cardLog(`no hidden,no click`);
             return;
         }
+        if (GameManager.inst.lockClk) {
+            this.cardLog(`lockClk,no click`);
+            return;
+        }
         GameManager.inst.onCardClk(this.idx, this.cardId);
     }
 

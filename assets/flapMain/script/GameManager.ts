@@ -99,7 +99,7 @@ export default class GameManager extends cc.Component {
 
 
         //初始化角色
-
+        this.lockClk = false;
     }
 
     depatureCardId: number[] = [];
@@ -107,7 +107,7 @@ export default class GameManager extends cc.Component {
 
     lastFlapCard: GComCard;
     inComeFlapCard: GComCard;
-
+    lockClk: boolean;
     onCardClk(idx: number, id: number) {
         if (!this.lastFlapCard) {
             this.lastFlapCard = this.cardNodes[idx].getComponent(GComCard);
@@ -116,9 +116,10 @@ export default class GameManager extends cc.Component {
             let inComeCard = this.inComeFlapCard = this.cardNodes[idx].getComponent(GComCard);
 
             inComeCard.changeStatus(E_CardStatus.tempDisplay);
+            this.lockClk = true;
             setTimeout(() => {
                 this.onCardSame();
-            }, 1000);
+            }, 600);
         }
     }
 
@@ -134,6 +135,7 @@ export default class GameManager extends cc.Component {
         }
         this.lastFlapCard = null;
         this.inComeFlapCard = null;
+        this.lockClk = false;
     }
 
     // update (dt) {}
