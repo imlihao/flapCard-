@@ -3,7 +3,7 @@
   "uuid": "195e62af-11ed-4d9f-a959-869d7d876683",
   "importer": "texture",
   "type": "sprite",
-  "wrapMode": "clamp",
+  "wrapMode": "repeat",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
   "genMipmaps": false,

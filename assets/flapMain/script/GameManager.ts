@@ -9,6 +9,7 @@
  * 
  */
 
+import { Deferred } from "./Deferred";
 import { E_CardStatus } from "./Defines";
 import GComCard from "./GComCard";
 import { shuffleArray } from "./MathUtil";
@@ -47,20 +48,19 @@ export default class GameManager extends cc.Component {
     @property(player)
     shibaInuB: player;
 
+    @property(cc.Node)
+    shibaADis: cc.Node;
+
+    @property(cc.Node)
+    shibaBDis: cc.Node;
+
     private idArr: number[];
 
     private cardNodes: cc.Node[];
 
     private curMovingPlayer: "shibaInuA" | "shibaInuB";
 
-    public switchPlayer() {
-        if (this.curMovingPlayer == "shibaInuA") {
-            this.curMovingPlayer = "shibaInuB";
-        } else {
-            this.curMovingPlayer = "shibaInuA";
-        }
-        LogUtil.logRed("switchPlayer", this.curMovingPlayer);
-    }
+
 
     start() {
         console.log("GameDataRegistered");
@@ -108,7 +108,7 @@ export default class GameManager extends cc.Component {
     lastFlapCard: GComCard;
     inComeFlapCard: GComCard;
     lockClk: boolean;
-    onCardClk(idx: number, id: number) {
+    async onCardClk(idx: number, id: number) {
         if (!this.lastFlapCard) {
             this.lastFlapCard = this.cardNodes[idx].getComponent(GComCard);
             this.lastFlapCard.changeStatus(E_CardStatus.tempDisplay);
@@ -117,13 +117,12 @@ export default class GameManager extends cc.Component {
 
             inComeCard.changeStatus(E_CardStatus.tempDisplay);
             this.lockClk = true;
-            setTimeout(() => {
-                this.onCardSame();
-            }, 600);
+            await this.onCardSame();
         }
+        await this.changeRound();
     }
 
-    onCardSame() {
+    async onCardSame() {
         if (this.lastFlapCard.cardId == this.inComeFlapCard.cardId) {
             this.lastFlapCard.changeStatus(E_CardStatus.depature);
             this.inComeFlapCard.changeStatus(E_CardStatus.depature);
@@ -136,7 +135,38 @@ export default class GameManager extends cc.Component {
         this.lastFlapCard = null;
         this.inComeFlapCard = null;
         this.lockClk = false;
+        await Deferred.wait(600).promise;
     }
 
-    // update (dt) {}
+    async dealBullet() {
+
+    }
+
+    async dealFan() {
+
+    }
+
+    async changeRound() {
+        //处理子弹
+        //处理风扇
+        await this.dealFan();
+        await this.dealBullet();
+
+    }
+
+    public switchPlayer() {
+        if (this.curMovingPlayer == "shibaInuA") {
+            this.curMovingPlayer = "shibaInuB";
+        } else {
+            this.curMovingPlayer = "shibaInuA";
+        }
+        LogUtil.logRed("switchPlayer", this.curMovingPlayer);
+        if (this.curMovingPlayer == "shibaInuA") {
+            this.shibaADis.active = true;
+            this.shibaBDis.active = false;
+        } else {
+            this.shibaADis.active = false;
+            this.shibaBDis.active = true;
+        }
+    }
 }
