@@ -137,6 +137,7 @@ export default class GameManager extends cc.Component {
         this.lastFlapCard = null;
         this.inComeFlapCard = null;
         await Deferred.wait(400).promise;
+        this.shibaInuA.onFire(2);
     }
 
     async dealBullet() {

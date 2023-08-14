@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import { Deferred } from "./Deferred";
 import { LogUtil } from "./logUtil";
 
 const { ccclass, property } = cc._decorator;
@@ -29,6 +30,9 @@ export default class player extends cc.Component {
 
     @property(cc.Label)
     debug: cc.Label;
+
+    @property([cc.Node])
+    gas:cc.Node[] = [];
 
     public firingCnt:number = 0;
     public legalRound:number = 0;
@@ -56,15 +60,19 @@ export default class player extends cc.Component {
         let legalCnt = Math.min(cnt, this.curbullet);
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
-            let sta = this.getComponent(cc.Animation).play();
-            let pms = new Promise((rec:(a:boolean)=>void, rej) => {
-                setTimeout(() => {
-                    rec(true);
-                }, sta.duration * 1000);
-            })
-            return pms;
+            let sta = this.getComponent(cc.Animation).play("放屁");
+            await Deferred.wait(sta.duration).promise;
+            return true;
         } else {
             return false;
+        }
+    }
+
+    onFart(){
+        for(let i = 0;i<this.firingCnt;++i){
+            this.gas[i].active = true;
+            this.gas[i].x = 112;
+            cc.tween(this.gas[i]).delay(i*100).to(200,{x:224}).start();
         }
     }
 

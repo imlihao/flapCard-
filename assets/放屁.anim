@@ -52,7 +52,7 @@
   "events": [
     {
       "frame": 0.21666666666666667,
-      "func": "",
+      "func": "onFart",
       "params": []
     }
   ]
