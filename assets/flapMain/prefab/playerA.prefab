@@ -131,8 +131,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -81.221,
-        -144.185,
+        0,
+        -152,
         0,
         0,
         0,
@@ -642,7 +642,7 @@
     "maxHp": 5,
     "curHp": 5,
     "maxBullet": 5,
-    "curbullet": 0,
+    "curbullet": 3,
     "debug": {
       "__id__": 3
     },

@@ -60,8 +60,9 @@ export default class player extends cc.Component {
         let legalCnt = Math.min(cnt, this.curbullet);
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
+            this.firingCnt = legalCnt;
             let sta = this.getComponent(cc.Animation).play("放屁");
-            await Deferred.wait(sta.duration).promise;
+            await Deferred.wait(sta.duration*1000).promise;
             return true;
         } else {
             return false;
@@ -70,9 +71,10 @@ export default class player extends cc.Component {
 
     onFart(){
         for(let i = 0;i<this.firingCnt;++i){
-            this.gas[i].active = true;
-            this.gas[i].x = 112;
-            cc.tween(this.gas[i]).delay(i*100).to(200,{x:224}).start();
+            let target = this.gas[i];
+            target.active = true;
+            target.x = 112;
+            cc.tween(target).delay(i*100).to(200,{x:412}).start();
         }
     }
 
