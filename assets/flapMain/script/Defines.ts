@@ -3,3 +3,15 @@ export enum E_CardStatus {
     tempDisplay = 1,
     depature = 2,
 }
+
+export enum E_CardEffectType {
+    NONE = 0,
+    /**
+     * 风扇
+     */
+    FAN = 1,
+    /**
+     * 
+     */
+    BULLET = 2
+}

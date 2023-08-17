@@ -7,8 +7,6 @@
 
 import { E_CardStatus } from "./Defines";
 import GameManager from "./GameManager";
-import { MessageCenter } from "./MessageCenter";
-import { LogUtil } from "./logUtil";
 
 const { ccclass, property } = cc._decorator;
 
@@ -43,7 +41,7 @@ export default class GComCard extends cc.Component {
      * 根据id颜色展示
      */
     private initDisplayWithData() {
-
+        
     }
 
     public changeStatus(newStat: E_CardStatus, playAni = true) {
