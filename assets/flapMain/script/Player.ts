@@ -103,15 +103,6 @@ export default class player extends cc.Component {
         }
     }
 
-    onFart() {
-        for (let i = 0; i < this.firingCnt; ++i) {
-            let target = this.gas[i];
-            target.active = true;
-            target.x = 112;
-            cc.tween(target).delay(i * 100).to(200, { x: 412 }).start();
-        }
-    }
-
     update(dt) {
         if (this.debuglabel) {
             let text = `
