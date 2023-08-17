@@ -11,6 +11,7 @@
 
 import { Deferred } from "./Deferred";
 import { E_CardStatus } from "./Defines";
+import GCardConfig from "./GCardConfig";
 import GComCard from "./GComCard";
 import { shuffleArray } from "./MathUtil";
 import player from "./Player";
@@ -53,6 +54,9 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Node)
     shibaBDis: cc.Node;
+
+    @property(GCardConfig)
+    config: GCardConfig;
 
     private idArr: number[];
 

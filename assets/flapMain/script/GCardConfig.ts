@@ -14,26 +14,26 @@ export default class GCardConfig extends cc.Component {
 
 
 
-    @property(cc.Sprite)
-    Bullet1: cc.Sprite;
+    @property(cc.SpriteFrame)
+    Bullet1: cc.SpriteFrame;
 
     @property(cc.Integer)
     Bullet1MaxId: number;
 
-    @property(cc.Sprite)
-    bullet2: cc.Sprite;
+    @property(cc.SpriteFrame)
+    bullet2: cc.SpriteFrame;
 
     @property(cc.Integer)
     bullet2MaxId: number;
 
-    @property(cc.Sprite)
-    Fan: cc.Sprite;
+    @property(cc.SpriteFrame)
+    Fan: cc.SpriteFrame;
 
     @property(cc.Integer)
     FanMaxId: number;
 
-    @property(cc.Sprite)
-    NONECard: cc.Sprite;
+    @property(cc.SpriteFrame)
+    NONECard: cc.SpriteFrame;
 
     @property(cc.Integer)
     NONECardMaxId: number;
@@ -54,7 +54,7 @@ export default class GCardConfig extends cc.Component {
         }
     }
 
-    public getCardSprById(cardId: number): cc.Sprite {
+    public getCardSprById(cardId: number): cc.SpriteFrame {
         if (cardId <= this.Bullet1MaxId) {
             return this.Bullet1;
         } else if (cardId <= this.bullet2MaxId) {

@@ -28,6 +28,9 @@ export default class GComCard extends cc.Component {
     @property(cc.Integer)
     cardId: number = 0;
 
+    @property(cc.Sprite)
+    cardFront: cc.Sprite;
+
     idx: number = -1;
 
     public initData(cardId: number, idx: number) {
@@ -41,7 +44,7 @@ export default class GComCard extends cc.Component {
      * 根据id颜色展示
      */
     private initDisplayWithData() {
-        
+        this.cardFront.spriteFrame = GameManager.inst.config.getCardSprById(this.cardId);
     }
 
     public changeStatus(newStat: E_CardStatus, playAni = true) {
@@ -50,7 +53,7 @@ export default class GComCard extends cc.Component {
             if (playAni) {
                 if (newStat == E_CardStatus.tempDisplay) {
                     let ani = this.node.getComponent(cc.Animation).play("cardFlyBack");
-                } else if (this.status == E_CardStatus.tempDisplay &&newStat== E_CardStatus.hidden) {
+                } else if (this.status == E_CardStatus.tempDisplay && newStat == E_CardStatus.hidden) {
                     this.node.getComponent(cc.Animation).play("cardFlyOut");
                 } else if (newStat == E_CardStatus.depature) {
                     this.node.getComponent(cc.Animation).playAdditive("cardDisapper");
