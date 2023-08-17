@@ -64,6 +64,7 @@ export default class player extends cc.Component {
     async onAddBullet(bullet: number) {
         let realAdd = Math.max(this.maxBullet - this.curbullet, bullet);
         this.curbullet += realAdd;
+        await Deferred.wait(400).promise;
         //TODO:动画
     }
 
@@ -72,22 +73,33 @@ export default class player extends cc.Component {
      */
     async onDamage(dHp: number) {
         this.curHp -= dHp;
+        await Deferred.wait(400).promise;
         //TODO:同步生命动画
     }
 
     async onGetFan() {
         //TODO: 播放拿出风扇的动画
         this.fanCnt = 1;
+        await Deferred.wait(400).promise;
     }
 
-    async onUseFan() {
+    async onUseFan(OtherFiringCnt: number) {
         //TODO: 播放拿出风扇的动画
-        this.fanCnt = 1;
+        this.fanCnt = 0;
+        await Deferred.wait(400).promise;
+        await this.onFire(OtherFiringCnt);
     }
 
     async onGetBag() {
         //TODO: 播放拿出塑料袋的动画
         this.bagCnt = 1;
+        await Deferred.wait(400).promise;
+    }
+
+    async onUseBag() {
+        //TODO: 播放拿出塑料袋的动画
+        this.bagCnt = 0;
+        await Deferred.wait(400).promise;
     }
 
     async onFire(cnt: number): Promise<boolean> {
@@ -96,11 +108,17 @@ export default class player extends cc.Component {
             LogUtil.log("fireBullet");
             this.firingCnt = legalCnt;
             let sta = this.getComponent(cc.Animation).play("放屁");
-            await Deferred.wait(sta.duration * 1000).promise;
+            await Deferred.waitAnimationFinished(sta).promise;
             return true;
         } else {
+            //TODO: 子弹不足是否也要动画
             return false;
         }
+    }
+
+    async onFireFinshed() {
+        this.firingCnt = 0;
+        await Deferred.wait(400).promise;
     }
 
     update(dt) {
@@ -109,8 +127,10 @@ export default class player extends cc.Component {
             生命:${this.curHp}/${this.maxHp}
             黄豆:${this.curbullet}/${this.maxBullet}
             风扇:${this.fanCnt}
-            塑料袋:${this.fanCnt}`;
+            塑料袋:${this.fanCnt}
+            FiringCnt:${this.firingCnt}`;
             this.debuglabel.string = text;
+
         }
     }
 }

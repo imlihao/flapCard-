@@ -184,7 +184,18 @@ export default class GameManager extends cc.Component {
         //处理子弹
         //播放子弹动画
         if (otherPlayer.firingCnt > 0) {
-
+            if (curPlayer.fanCnt > 0) {
+                //这里会有动画同步问题？
+                await Promise.race([
+                    otherPlayer.onFireFinshed(),
+                    curPlayer.onUseFan(otherPlayer.firingCnt)]);
+            } else if (curPlayer.bagCnt > 0) {
+                await Promise.race([
+                    otherPlayer.onFireFinshed(),
+                    curPlayer.onUseBag()]);
+            } else {
+                
+            }
         }
 
         //处理风扇
