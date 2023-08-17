@@ -58,11 +58,32 @@ export default class GameManager extends cc.Component {
     @property(GCardConfig)
     config: GCardConfig;
 
+    @property(cc.Integer)
+    roundMaxTimeInSec: number = 0;
+
+    public curRoundLeftTimeInSec: number;
+
+    isStart: boolean = false;
+
     private idArr: number[];
 
     private cardNodes: cc.Node[];
 
     private curMovingPlayer: "shibaInuA" | "shibaInuB";
+
+    depatureCardId: number[] = [];
+
+    depatureIdxs: number[] = [];
+
+    lastFlapCard: GComCard;
+
+    inComeFlapCard: GComCard;
+
+    private lockClk: boolean;
+
+    public get isClkLocked() {
+        return this.lockClk || !this.isStart;
+    }
 
     public getCurPlayer(): player {
         if (this.curMovingPlayer == "shibaInuA") {
@@ -81,9 +102,27 @@ export default class GameManager extends cc.Component {
 
 
     start() {
+        this.isStart = false;
         console.log("GameDataRegistered");
         GameManager.inst = this;
         this.initData();
+    }
+
+    initData() {
+        //初始化拍组
+        this.generateIds(this.maxPair);
+
+        this.cardNodes = [];
+        for (let i = 0; i < this.idArr.length; ++i) {
+            let cardNode = cc.instantiate(this.cardPfb);
+            cardNode.getComponent(GComCard).initData(this.idArr[i], i);
+            LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
+            this.cardNodes.push(cardNode);
+            this.cardContainer.addChild(cardNode);
+        }
+        //初始化角色
+        this.lockClk = false;
+        this.isStart = true;
     }
 
     /**
@@ -102,30 +141,10 @@ export default class GameManager extends cc.Component {
         LogUtil.log("after shuffleArray:" + arr.toString());
     }
 
-    initData() {
-        //初始化拍组
-        this.generateIds(this.maxPair);
+    public startGame() {
 
-        this.cardNodes = [];
-        for (let i = 0; i < this.idArr.length; ++i) {
-            let cardNode = cc.instantiate(this.cardPfb);
-            cardNode.getComponent(GComCard).initData(this.idArr[i], i);
-            LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
-            this.cardNodes.push(cardNode);
-            this.cardContainer.addChild(cardNode);
-        }
-
-
-        //初始化角色
-        this.lockClk = false;
     }
 
-    depatureCardId: number[] = [];
-    depatureIdxs: number[] = [];
-
-    lastFlapCard: GComCard;
-    inComeFlapCard: GComCard;
-    lockClk: boolean;
     async onCardClk(idx: number, id: number) {
         this.lockClk = true;
         if (!this.lastFlapCard) {
@@ -163,7 +182,7 @@ export default class GameManager extends cc.Component {
                     await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.NONE: {
-                    
+
                 } break;
                 default:
                     break;
@@ -233,6 +252,15 @@ export default class GameManager extends cc.Component {
         } else {
             this.shibaADis.active = false;
             this.shibaBDis.active = true;
+        }
+    }
+
+    protected update(dt: number): void {
+        if (this.isStart) {
+            this.curRoundLeftTimeInSec -= dt;
+            if (this.curRoundLeftTimeInSec < 0) {
+                this.switchPlayer();
+            }
         }
     }
 }
