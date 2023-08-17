@@ -33,6 +33,12 @@ export default class GCardConfig extends cc.Component {
     FanMaxId: number;
 
     @property(cc.SpriteFrame)
+    Bag: cc.SpriteFrame;
+
+    @property(cc.Integer)
+    BagMaxId: number;
+
+    @property(cc.SpriteFrame)
     NONECard: cc.SpriteFrame;
 
     @property(cc.Integer)
@@ -49,6 +55,8 @@ export default class GCardConfig extends cc.Component {
             return [E_CardEffectType.BULLET, 2];
         } else if (cardId <= this.FanMaxId) {
             return [E_CardEffectType.FAN, 0];
+        } else if (cardId <= this.BagMaxId) {
+            return [E_CardEffectType.BAG, 0];
         } else {
             return [E_CardEffectType.NONE, 0];
         }
@@ -61,6 +69,8 @@ export default class GCardConfig extends cc.Component {
             return this.bullet2;
         } else if (cardId <= this.FanMaxId) {
             return this.Fan;
+        } else if (cardId <= this.BagMaxId) {
+            return this.Bag;
         } else {
             return this.NONECard;
         }

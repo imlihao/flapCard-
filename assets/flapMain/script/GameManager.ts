@@ -71,6 +71,13 @@ export default class GameManager extends cc.Component {
             return this.shibaInuB;
         }
     }
+    public getOtherPlayer(): player {
+        if (this.curMovingPlayer == "shibaInuA") {
+            return this.shibaInuB;
+        } else {
+            return this.shibaInuA;
+        }
+    }
 
 
     start() {
@@ -147,10 +154,13 @@ export default class GameManager extends cc.Component {
             const curPlayer = this.getCurPlayer();
             switch (cardEffec) {
                 case E_CardEffectType.FAN: {
-                    await curPlayer.onDealFan();
+                    await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.BULLET: {
                     await curPlayer.onFire(param);
+                } break;
+                case E_CardEffectType.BAG: {
+                    await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.NONE: {
 
@@ -168,6 +178,19 @@ export default class GameManager extends cc.Component {
         await Deferred.wait(400).promise;
     }
 
+    async SettleRound() {
+        const curPlayer = this.getCurPlayer();
+        const otherPlayer = this.getOtherPlayer();
+        //处理子弹
+        //播放子弹动画
+        if (otherPlayer.firingCnt > 0) {
+
+        }
+
+        //处理风扇
+
+    }
+
     async dealBullet() {
         await this.shibaInuA.onFire(2);
     }
@@ -177,12 +200,7 @@ export default class GameManager extends cc.Component {
     }
 
     async changeRound() {
-        //处理子弹
-        //处理风扇
-        await this.dealFan();
-        await this.dealBullet();
         this.switchPlayer();
-
     }
 
     public switchPlayer() {

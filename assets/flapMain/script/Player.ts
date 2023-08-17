@@ -34,8 +34,10 @@ export default class player extends cc.Component {
     @property([cc.Node])
     gas: cc.Node[] = [];
 
-    public firingCnt: number = 0;
     public legalRound: number = 0;
+    public firingCnt: number = 0;
+    public bagCnt: number = 0;
+    public fanCnt: number = 0;
 
     start() {
         if (this.curHp == 0) {
@@ -52,11 +54,40 @@ export default class player extends cc.Component {
      * @param addCnt 
      */
     async onAddHp(addCnt: number) {
-        this.curbullet += addCnt;
+        this.curHp += this.curHp;
     }
 
-    async onDealFan() {
-        
+    /**
+     * 
+     * @param bullet 
+     */
+    async onAddBullet(bullet: number) {
+        let realAdd = Math.max(this.maxBullet - this.curbullet, bullet);
+        this.curbullet += realAdd;
+        //TODO:动画
+    }
+
+    /**
+     * @param dHp 
+     */
+    async onDamage(dHp: number) {
+        this.curHp -= dHp;
+        //TODO:同步生命动画
+    }
+
+    async onGetFan() {
+        //TODO: 播放拿出风扇的动画
+        this.fanCnt = 1;
+    }
+
+    async onUseFan() {
+        //TODO: 播放拿出风扇的动画
+        this.fanCnt = 1;
+    }
+
+    async onGetBag() {
+        //TODO: 播放拿出塑料袋的动画
+        this.bagCnt = 1;
     }
 
     async onFire(cnt: number): Promise<boolean> {
