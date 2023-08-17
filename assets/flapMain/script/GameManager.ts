@@ -163,7 +163,7 @@ export default class GameManager extends cc.Component {
                     await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.NONE: {
-
+                    
                 } break;
                 default:
                     break;
@@ -214,14 +214,6 @@ export default class GameManager extends cc.Component {
 
     public FinishGame(loser: string) {
         console.log(`${loser}输掉了了比赛`);
-    }
-
-    async dealBullet() {
-        await this.shibaInuA.onFire(2);
-    }
-
-    async dealFan() {
-
     }
 
     async changeRound() {
