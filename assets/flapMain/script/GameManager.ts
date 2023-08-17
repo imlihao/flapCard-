@@ -10,7 +10,7 @@
  */
 
 import { Deferred } from "./Deferred";
-import { E_CardStatus } from "./Defines";
+import { E_CardEffectType, E_CardStatus } from "./Defines";
 import GCardConfig from "./GCardConfig";
 import GComCard from "./GComCard";
 import { shuffleArray } from "./MathUtil";
@@ -64,6 +64,13 @@ export default class GameManager extends cc.Component {
 
     private curMovingPlayer: "shibaInuA" | "shibaInuB";
 
+    public getCurPlayer(): player {
+        if (this.curMovingPlayer == "shibaInuA") {
+            return this.shibaInuA;
+        } else {
+            return this.shibaInuB;
+        }
+    }
 
 
     start() {
@@ -134,6 +141,24 @@ export default class GameManager extends cc.Component {
             this.inComeFlapCard.changeStatus(E_CardStatus.depature);
             this.depatureCardId.push(this.lastFlapCard.cardId);
             this.depatureIdxs.push(this.lastFlapCard.idx);
+
+            const [cardEffec, param] = this.config.getCardEffect(this.inComeFlapCard.cardId);
+            LogUtil.log(`${this.curMovingPlayer}: card:${this.inComeFlapCard.cardId},Effect:${E_CardEffectType[cardEffec]},${param}`)
+            const curPlayer = this.getCurPlayer();
+            switch (cardEffec) {
+                case E_CardEffectType.FAN: {
+                    await curPlayer.onDealFan();
+                } break;
+                case E_CardEffectType.BULLET: {
+                    await curPlayer.onFire(param);
+                } break;
+                case E_CardEffectType.NONE: {
+
+                } break;
+                default:
+                    break;
+            }
+
         } else {
             this.lastFlapCard.changeStatus(E_CardStatus.hidden);
             this.inComeFlapCard.changeStatus(E_CardStatus.hidden);

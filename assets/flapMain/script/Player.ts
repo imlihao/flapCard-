@@ -32,10 +32,10 @@ export default class player extends cc.Component {
     debug: cc.Label;
 
     @property([cc.Node])
-    gas:cc.Node[] = [];
+    gas: cc.Node[] = [];
 
-    public firingCnt:number = 0;
-    public legalRound:number = 0;
+    public firingCnt: number = 0;
+    public legalRound: number = 0;
 
     start() {
         if (this.curHp == 0) {
@@ -53,28 +53,31 @@ export default class player extends cc.Component {
      */
     async onAddHp(addCnt: number) {
         this.curbullet += addCnt;
-
     }
 
-    async onFire(cnt: number):Promise<boolean>{
+    async onDealFan() {
+        
+    }
+
+    async onFire(cnt: number): Promise<boolean> {
         let legalCnt = Math.min(cnt, this.curbullet);
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
             this.firingCnt = legalCnt;
             let sta = this.getComponent(cc.Animation).play("放屁");
-            await Deferred.wait(sta.duration*1000).promise;
+            await Deferred.wait(sta.duration * 1000).promise;
             return true;
         } else {
             return false;
         }
     }
 
-    onFart(){
-        for(let i = 0;i<this.firingCnt;++i){
+    onFart() {
+        for (let i = 0; i < this.firingCnt; ++i) {
             let target = this.gas[i];
             target.active = true;
             target.x = 112;
-            cc.tween(target).delay(i*100).to(200,{x:412}).start();
+            cc.tween(target).delay(i * 100).to(200, { x: 412 }).start();
         }
     }
 
