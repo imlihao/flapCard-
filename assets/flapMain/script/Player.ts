@@ -90,6 +90,10 @@ export default class player extends cc.Component {
         await this.onFire(OtherFiringCnt);
     }
 
+    async onWasteFan() {
+        this.fanCnt = 0;
+    }
+
     async onGetBag() {
         //TODO: 播放拿出塑料袋的动画
         this.bagCnt = 1;
@@ -100,6 +104,10 @@ export default class player extends cc.Component {
         //TODO: 播放拿出塑料袋的动画
         this.bagCnt = 0;
         await Deferred.wait(400).promise;
+    }
+
+    async onWasteBag() {
+        this.bagCnt = 0;
     }
 
     async onFire(cnt: number): Promise<boolean> {

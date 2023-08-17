@@ -183,23 +183,37 @@ export default class GameManager extends cc.Component {
         const otherPlayer = this.getOtherPlayer();
         //处理子弹
         //播放子弹动画
-        if (otherPlayer.firingCnt > 0) {
+        const otherFiringCnt = otherPlayer.firingCnt;
+        if (otherFiringCnt > 0) {
             if (curPlayer.fanCnt > 0) {
                 //这里会有动画同步问题？
                 await Promise.race([
                     otherPlayer.onFireFinshed(),
-                    curPlayer.onUseFan(otherPlayer.firingCnt)]);
+                    curPlayer.onUseFan(otherFiringCnt)]);
             } else if (curPlayer.bagCnt > 0) {
                 await Promise.race([
                     otherPlayer.onFireFinshed(),
                     curPlayer.onUseBag()]);
             } else {
-                
+                await Promise.race([
+                    otherPlayer.onFireFinshed(),
+                    curPlayer.onDamage(otherFiringCnt)]);
+            }
+        } else {
+            if (curPlayer.fanCnt > 0) {
+                await curPlayer.onWasteFan();
+            }
+            if (curPlayer.bagCnt > 0) {
+                await curPlayer.onWasteBag();
             }
         }
+        if (curPlayer.curHp < 0) {
+            this.FinishGame(this.curMovingPlayer)
+        }
+    }
 
-        //处理风扇
-
+    public FinishGame(loser: string) {
+        console.log(`${loser}输掉了了比赛`);
     }
 
     async dealBullet() {
