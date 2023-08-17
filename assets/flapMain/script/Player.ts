@@ -106,9 +106,10 @@ export default class player extends cc.Component {
     update(dt) {
         if (this.debuglabel) {
             let text = `
-            hp:${this.curHp}/${this.maxHp};
-            bullet:${this.curbullet}/${this.maxBullet};
-            `;
+            生命:${this.curHp}/${this.maxHp}
+            黄豆:${this.curbullet}/${this.maxBullet}
+            风扇:${this.fanCnt}
+            塑料袋:${this.fanCnt}`;
             this.debuglabel.string = text;
         }
     }
