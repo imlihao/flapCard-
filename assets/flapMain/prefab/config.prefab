@@ -1,0 +1,133 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "config",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "92f74xs1RhPspVdeQ2i5B+i",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "Farts": [
+      {
+        "__uuid__": "87b72b1c-0de9-4d34-b100-a1807fa7ae7c"
+      },
+      {
+        "__uuid__": "a139caae-f7ff-44c3-80e5-87763983dfe2"
+      }
+    ],
+    "Beans": [
+      {
+        "__uuid__": "e76ea12c-bf75-484c-a7a3-94b8b3516523"
+      },
+      {
+        "__uuid__": "365b85e1-832c-4d41-82b4-6af555929b4c"
+      }
+    ],
+    "Fan": {
+      "__uuid__": "7d31f737-74af-46d1-ae4a-247e821e9ebb"
+    },
+    "Bag": {
+      "__uuid__": "ba6671f2-7222-4535-a053-b65ec5f28def"
+    },
+    "NONECard": {
+      "__uuid__": "1745db90-0273-4510-b544-296a30b12fcf"
+    },
+    "FartCounOrder1": [
+      3,
+      3
+    ],
+    "BeanCntOrder2": [
+      3,
+      3
+    ],
+    "FanCntOrder3": 3,
+    "BagCntOrder4": 3,
+    "NONECardCnt": 3,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "",
+    "sync": false
+  }
+]
