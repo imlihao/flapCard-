@@ -35,6 +35,8 @@ export default class GComCard extends cc.Component {
 
     idx: number = -1;
 
+    @property(cc.Label)
+    debug: cc.Label = null;
 
     public myEffect: EffectPair;
 
@@ -76,7 +78,7 @@ export default class GComCard extends cc.Component {
 
     }
 
-    public onCardClk(clkData,isAi: boolean = false) {
+    public onCardClk(clkData, isAi: boolean = false) {
         if (this.status != E_CardStatus.hidden) {
             this.cardLog(`no hidden,no click`);
             return;
@@ -97,7 +99,11 @@ export default class GComCard extends cc.Component {
     }
 
     update(dt) {
-
+        if (this.debug) {
+            this.debug.string = `
+${this.card_compareStr}
+status:${E_CardStatus[this.status]}`;
+        }
     }
 
     private cardLog(...data: any[]) {
