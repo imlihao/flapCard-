@@ -185,7 +185,9 @@ export default class GameManager extends cc.Component {
         }
         LogUtil.log("generate ids:" + arr.toString());
         //乱序
-        this.idArr = shuffleArray<number>(arr);
+        // this.idArr = shuffleArray<number>(arr);
+         //NO乱序
+        this.idArr = arr;
         LogUtil.log("after shuffleArray:" + arr.toString());
     }
 
