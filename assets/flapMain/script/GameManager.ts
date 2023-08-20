@@ -35,6 +35,9 @@ export default class GameManager extends cc.Component {
 
     static inst: GameManager = null;
 
+    @property(cc.Label)
+    debug: cc.Label = null;
+
     @property(cc.Integer)
     maxPair: number = 0;
 
@@ -190,6 +193,7 @@ export default class GameManager extends cc.Component {
         //初始化角色
         this.lockClk = false;
         this.isStart = true;
+        this.curRoundLeftTimeInSec = this.roundMaxTimeInSec;
         if (GameDifines.gameType == GameType.Ai) {
             if (this.curMovingPlayer == this.WhoIsAi) {
                 this.AICom.AiMove();
@@ -318,6 +322,7 @@ export default class GameManager extends cc.Component {
             let loser = this.shibaInuA.curHp > 0 ? this.shibaInuB : this.shibaInuA;
             await this.FinishGame(winner, loser);
         } else {
+            await Deferred.wait(400).promise;
             this.switchPlayer();
         }
     }
@@ -336,6 +341,7 @@ export default class GameManager extends cc.Component {
             this.shibaADis.active = false;
             this.shibaBDis.active = true;
         }
+        this.curRoundLeftTimeInSec = this.roundMaxTimeInSec;
         if (GameDifines.gameType == GameType.Ai) {
             if (this.curMovingPlayer == this.WhoIsAi) {
                 this.AICom.AiMove();
@@ -349,6 +355,26 @@ export default class GameManager extends cc.Component {
             if (this.curRoundLeftTimeInSec < 0) {
                 this.switchPlayer();
             }
+        }
+
+        if (this.debug) {
+            if (GameDifines.gameType == GameType.Self) {
+                this.debug.string = `
+自己对自己
+当前回合：${this.curMovingPlayer}
+                `
+            } else if (GameDifines.gameType == GameType.Ai) {
+                let isAi = this.curMovingPlayer == this.WhoIsAi;
+                this.debug.string = `
+自己对AI
+当前回合：${isAi ? "AI" : "我"}
+                `
+            } else {
+                this.debug.string = `
+未知
+                `
+            }
+            this.debug.string += `当前回合剩余时间：${this.curRoundLeftTimeInSec.toFixed(2)}`;
         }
     }
 }
