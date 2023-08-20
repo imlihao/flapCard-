@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "fartHit",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.45,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "fart1": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 359.502
+            },
+            {
+              "frame": 0.45,
+              "value": 692.514
+            }
+          ]
+        }
+      },
+      "fart2": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 374.639
+            },
+            {
+              "frame": 0.45,
+              "value": 658.456
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

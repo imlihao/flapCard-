@@ -27,6 +27,22 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class AniState extends cc.Component {
 
+    @property(cc.Prefab)
+    fartPfb: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    beanPfb: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    FanPfb: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    bagPfb: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    idlePfb: cc.Prefab = null;
+
+
     @property(cc.Animation)
     fartNode: cc.Animation = null;
 
@@ -48,6 +64,17 @@ export default class AniState extends cc.Component {
 
     private mp: Map<E_ANIMATION_Player, cc.Animation> = null;
     onStart() {
+        this.fartNode = cc.instantiate(this.fartPfb).getComponent(cc.Animation);
+        this.fartNode.node.parent = this.node;
+        this.beanNode = cc.instantiate(this.beanPfb).getComponent(cc.Animation);
+        this.beanNode.node.parent = this.node;
+        this.Fan = cc.instantiate(this.FanPfb).getComponent(cc.Animation);
+        this.Fan.node.parent = this.node;
+        this.bag = cc.instantiate(this.bagPfb).getComponent(cc.Animation);
+        this.bag.node.parent = this.node;
+        this.idle = cc.instantiate(this.idlePfb).getComponent(cc.Animation);
+        this.idle.node.parent = this.node;
+        
         let map = this.mp = new Map<E_ANIMATION_Player, cc.Animation>();
         map.set(E_ANIMATION_Player.idle, this.idle);
         map.set(E_ANIMATION_Player.fart, this.fartNode);
@@ -73,7 +100,7 @@ export default class AniState extends cc.Component {
         this.makeNodeFitState();
         this.idle.play();
     }
-    
+
     async changeState(state: E_ANIMATION_Player) {
         if (this.myState == state) {
             return;
