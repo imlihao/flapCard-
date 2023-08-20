@@ -128,6 +128,7 @@ export default class player extends cc.Component {
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
             this.firingCnt = legalCnt;
+            this.curbullet -= legalCnt;
             await this.mainState.changeState(E_ANIMATION_Player.fart, legalCnt);
             await this.fartState.changeState(E_ANIMATION_Fart.firstFart, legalCnt);
             await Deferred.wait(100).promise;

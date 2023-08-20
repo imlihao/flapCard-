@@ -250,7 +250,7 @@ export default class GameManager extends cc.Component {
             const curPlayer = this.getCurPlayer();
             switch (cardEffec) {
                 case E_CardEffectType.BEAN: {
-                    await curPlayer.onFart(param);
+                    await curPlayer.onAddBeans(param);
                 } break;
                 case E_CardEffectType.FART: {
                     await this.SettleRound();
@@ -291,7 +291,7 @@ export default class GameManager extends cc.Component {
                 await curPlayer.onUseFan(otherFiringCnt);
             }
             else if (curPlayer.bagCnt > 0) { //对方有子弹，自己有袋子
-                await otherPlayer.onFartFinshed();
+                 otherPlayer.onFartFinshed();
                 await curPlayer.onUseBag();
             } else { //对方有子弹，自己没有风扇和袋子
                 await otherPlayer.onFartFinshed();
