@@ -2274,8 +2274,10 @@
     "config": {
       "__id__": 54
     },
-    "AICom": null,
-    "roundMaxTimeInSec": 20,
+    "AICom": {
+      "__id__": 55
+    },
+    "roundMaxTimeInSec": 30,
     "_id": "d8PCMfbSVPJJqSOm4ANpkm"
   },
   {

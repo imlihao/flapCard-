@@ -5,7 +5,6 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import GameManager from "./GameManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -15,6 +14,8 @@ export default class AiCom extends cc.Component {
     @property(cc.Integer)
     tinkingTimeInSec: number = 1;
 
+    gameMgr: any = null;
+    
     protected onEnable(): void {
         this.AILog("AI 启动");
     }
@@ -31,7 +32,7 @@ export default class AiCom extends cc.Component {
 
     public doClk(): void {
         //随机一个可以点击的卡片
-        const canFlapCards = GameManager.inst.getAllCanFlapCard();
+        const canFlapCards = this.gameMgr.getAllCanFlapCard();
         if (canFlapCards.length <= 0) {
             this.AILog("没有可以点击的卡片");
             return;

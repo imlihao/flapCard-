@@ -9,7 +9,6 @@
  * 
  */
 
-import AiCom from "./AICom";
 import { Deferred } from "./Deferred";
 import { E_CardEffectType, E_CardStatus, GameDifines, GameType } from "./Defines";
 import GCardConfig from "./GCardConfig";
@@ -18,6 +17,7 @@ import { shuffleArray } from "./MathUtil";
 import player from "./Player";
 import PlayerData from "./PlayerData";
 import { LogUtil } from "./logUtil";
+import AiCom from "./AICom";
 
 const { ccclass, property } = cc._decorator;
 
@@ -141,6 +141,7 @@ export default class GameManager extends cc.Component {
         } else if (GameDifines.gameType == GameType.Ai) {
             console.error("对手是AI");
             this.AICom.node.active = true;
+            this.AICom.gameMgr = this;
             let ran = Math.random();
             // if (ran > 0.5) {
             this.WhoAmI = "shibaInuA";
