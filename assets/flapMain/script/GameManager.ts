@@ -9,7 +9,7 @@
  * 
  */
 
-import AiCom from "./AI";
+import AiCom from "./AICom";
 import { Deferred } from "./Deferred";
 import { E_CardEffectType, E_CardStatus, GameDifines, GameType } from "./Defines";
 import GCardConfig from "./GCardConfig";
