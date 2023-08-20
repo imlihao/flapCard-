@@ -119,7 +119,11 @@ export default class AniState extends cc.Component {
             this.myState = state;
             this.makeNodeFitState();
             let targetSta = this.mp.get(this.myState);
-            let sta = targetSta.play(targetSta.getClips()[0].name);
+            let playIdx = 0;
+            if(state == E_ANIMATION_Player.bean){
+                playIdx = param - 1;
+            }
+            let sta = targetSta.play(targetSta.getClips()[playIdx].name);
             await Deferred.waitAnimationFinished(sta).promise;
         }
         this.backToIdle();

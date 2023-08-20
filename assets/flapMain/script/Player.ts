@@ -71,7 +71,7 @@ export default class player extends cc.Component {
      * @param bullet 
      */
     async onAddBeans(bullet: number) {
-        let realAdd = Math.max(this.maxBullet - this.curbullet, bullet);
+        let realAdd = Math.min(this.maxBullet - this.curbullet, bullet);
         this.curbullet += realAdd;
         await this.mainState.changeState(E_ANIMATION_Player.bean, realAdd);
         await Deferred.wait(100).promise;
