@@ -166,9 +166,7 @@ export default class GameManager extends cc.Component {
             this.cardNodes.push(cardNode);
             this.cardContainer.addChild(cardNode);
         }
-        //初始化角色
-        this.lockClk = false;
-        this.isStart = true;
+        this.curMovingPlayer = "shibaInuA";
         this.startGame();
     }
 
@@ -189,6 +187,9 @@ export default class GameManager extends cc.Component {
     }
 
     public startGame() {
+        //初始化角色
+        this.lockClk = false;
+        this.isStart = true;
         if (GameDifines.gameType == GameType.Ai) {
             if (this.curMovingPlayer == this.WhoIsAi) {
                 this.AICom.AiMove();

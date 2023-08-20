@@ -15,7 +15,7 @@ export default class AiCom extends cc.Component {
     tinkingTimeInSec: number = 1;
 
     gameMgr: any = null;
-    
+
     protected onEnable(): void {
         this.AILog("AI 启动");
     }
@@ -39,7 +39,7 @@ export default class AiCom extends cc.Component {
         }
         let ran = Math.random();
         let idx = Math.floor(ran * canFlapCards.length);
-        canFlapCards[idx].onCardClk(true);
+        canFlapCards[idx].onCardClk(null, true);
         this.AILog("点击 位置：" + canFlapCards[idx].idx + "  卡片id：" + canFlapCards[idx].cardId + "  卡片类型：" + canFlapCards[idx].card_compareStr);
     }
 

@@ -74,7 +74,7 @@ export default class GComCard extends cc.Component {
 
     }
 
-    public onCardClk(isAi: boolean = false) {
+    public onCardClk(clkData,isAi: boolean = false) {
         if (this.status != E_CardStatus.hidden) {
             this.cardLog(`no hidden,no click`);
             return;
@@ -83,8 +83,8 @@ export default class GComCard extends cc.Component {
             this.cardLog(`lockClk,no click`);
             return;
         }
-        if (!GameManager.inst.canIClk(isAi)) {
-            this.cardLog(`${isAi ? "AI" : "ME"} 当前不是我的回合, no click`);
+        if (!GameManager.inst.canIClk(isAi === true)) {
+            this.cardLog(`${isAi === true ? "AI" : "ME"} 当前不是我的回合, no click`);
             return;
         }
         GameManager.inst.onCardClk(this.idx, this.cardId);
