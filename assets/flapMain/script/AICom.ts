@@ -12,7 +12,7 @@ const { ccclass, property } = cc._decorator;
 export default class AiCom extends cc.Component {
 
     @property(cc.Integer)
-    tinkingTimeInSec: number = 1;
+    tinkingTimeInSec: number = 0.8;
 
     gameMgr: any = null;
 
@@ -27,7 +27,7 @@ export default class AiCom extends cc.Component {
 
         setTimeout(() => {
             this.doClk();
-        }, this.tinkingTimeInSec * 1000 + 100);
+        }, this.tinkingTimeInSec * 1000 + 500);
     }
 
     public doClk(): void {
