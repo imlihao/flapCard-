@@ -109,9 +109,10 @@ export default class GameManager extends cc.Component {
     }
 
     initData() {
+        this.shibaInuA.name = "shibaInuA";
+        this.shibaInuB.name = "shibaInuB";
         //初始化拍组
         this.generateIds(this.maxPair);
-
         this.cardNodes = [];
         for (let i = 0; i < this.idArr.length; ++i) {
             let cardNode = cc.instantiate(this.cardPfb);
@@ -156,6 +157,7 @@ export default class GameManager extends cc.Component {
             inComeCard.changeStatus(E_CardStatus.tempDisplay);
             await Deferred.wait(600).promise;
             await this.onCardSame();
+            await this.SettleRound();
             await this.changeRound();
         }
         this.lockClk = false;
@@ -229,17 +231,22 @@ export default class GameManager extends cc.Component {
                 await curPlayer.onWasteBag();
             }
         }
-        if (curPlayer.curHp < 0) {
-            this.FinishGame(this.curMovingPlayer)
-        }
     }
 
-    public FinishGame(loser: string) {
-        console.log(`${loser}输掉了了比赛`);
+    async FinishGame(winner: player, loser: player) {
+        this.isStart = false;
+        console.error(`${loser.name}输掉了了比赛`);
+        //TODO: 动画
     }
 
     async changeRound() {
-        this.switchPlayer();
+        if (this.shibaInuA.curHp <= 0 || this.shibaInuB.curHp <= 0) {
+            let winner = this.shibaInuA.curHp > 0 ? this.shibaInuA : this.shibaInuB;
+            let loser = this.shibaInuA.curHp > 0 ? this.shibaInuB : this.shibaInuA;
+            await this.FinishGame(winner, loser);
+        } else {
+            this.switchPlayer();
+        }
     }
 
     public switchPlayer() {
