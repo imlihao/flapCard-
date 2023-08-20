@@ -23,7 +23,7 @@ const { ccclass, property } = cc._decorator;
  */
 export default class GComCard extends cc.Component {
 
-    private status: E_CardStatus;
+    public status: E_CardStatus;
 
     @property(cc.Integer)
     cardId: number = 0;

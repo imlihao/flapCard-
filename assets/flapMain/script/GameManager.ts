@@ -9,6 +9,7 @@
  * 
  */
 
+import AiCom from "./AI";
 import { Deferred } from "./Deferred";
 import { E_CardEffectType, E_CardStatus, GameDifines, GameType } from "./Defines";
 import GCardConfig from "./GCardConfig";
@@ -57,6 +58,9 @@ export default class GameManager extends cc.Component {
 
     @property(GCardConfig)
     config: GCardConfig;
+
+    @property(AiCom)
+    AICom: AiCom;
 
     @property(cc.Integer)
     roundMaxTimeInSec: number = 0;
@@ -135,16 +139,19 @@ export default class GameManager extends cc.Component {
         if (GameDifines.gameType == GameType.Self) {
 
         } else if (GameDifines.gameType == GameType.Ai) {
+            this.AICom.node.active = true;
             let ran = Math.random();
-            if (ran > 0.5) {
-                this.WhoAmI = "shibaInuA";
-                this.WhoIsAi = "shibaInuB";
-                this.WhoIsMyOpponent = "shibaInuB";
-            } else {
-                this.WhoAmI = "shibaInuA";
-                this.WhoIsAi = "shibaInuB";
-                this.WhoIsMyOpponent = "shibaInuB";
-            }
+            // if (ran > 0.5) {
+            this.WhoAmI = "shibaInuA";
+            this.WhoIsAi = "shibaInuB";
+            this.WhoIsMyOpponent = "shibaInuB";
+            // } else {
+            //     this.WhoAmI = "shibaInuA";
+            //     this.WhoIsAi = "shibaInuB";
+            //     this.WhoIsMyOpponent = "shibaInuB";
+            // }
+            console.log("WhoAmI", this.WhoAmI);
+            console.log("WhoIsAi", this.WhoIsAi);
         }
 
         //初始化拍组
@@ -160,6 +167,7 @@ export default class GameManager extends cc.Component {
         //初始化角色
         this.lockClk = false;
         this.isStart = true;
+        this.startGame();
     }
 
     /**
@@ -179,7 +187,29 @@ export default class GameManager extends cc.Component {
     }
 
     public startGame() {
+        if (GameDifines.gameType == GameType.Ai) {
+            if (this.curMovingPlayer == this.WhoIsAi) {
+                this.AICom.AiMove();
+            }
+        }
+    }
 
+    /**
+     * 当前所有可以点击的卡片
+     * @returns 
+     */
+    public getAllCanFlapCard(): GComCard[] {
+        let canFlapCards: GComCard[] = [];
+        for (let i = 0; i < this.cardNodes.length; ++i) {
+            let card = this.cardNodes[i].getComponent(GComCard);
+            if (card.status == E_CardStatus.hidden) {
+                canFlapCards.push(card);
+            }
+        }
+        if (canFlapCards.length == 0) {
+            return null;
+        }
+        return canFlapCards;
     }
 
     async onCardClk(idx: number, id: number) {
@@ -302,6 +332,11 @@ export default class GameManager extends cc.Component {
         } else {
             this.shibaADis.active = false;
             this.shibaBDis.active = true;
+        }
+        if (GameDifines.gameType == GameType.Ai) {
+            if (this.curMovingPlayer == this.WhoIsAi) {
+                this.AICom.AiMove();
+            }
         }
     }
 
