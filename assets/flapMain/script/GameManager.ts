@@ -132,8 +132,8 @@ export default class GameManager extends cc.Component {
     public generateIds(maxPair: number) {
         const arr = new Array<number>(maxPair * 2);
         for (let i = 0; i < maxPair; ++i) {
-            arr[i] = 1000 + i;
-            arr[i + maxPair] = 1000 + i;
+            arr[i] = i + 1;
+            arr[i + maxPair] = i + 1;
         }
         LogUtil.log("generate ids:" + arr.toString());
         //乱序
@@ -162,7 +162,7 @@ export default class GameManager extends cc.Component {
     }
 
     async onCardSame() {
-        if (this.lastFlapCard.cardId == this.inComeFlapCard.cardId) {
+        if (this.lastFlapCard.card_compareStr == this.inComeFlapCard.card_compareStr) {
             this.lastFlapCard.changeStatus(E_CardStatus.depature);
             this.inComeFlapCard.changeStatus(E_CardStatus.depature);
             this.depatureCardId.push(this.lastFlapCard.cardId);

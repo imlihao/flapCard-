@@ -132,13 +132,12 @@ export default class player extends cc.Component {
     update(dt) {
         if (this.debuglabel) {
             let text = `
-            生命:${this.curHp}/${this.maxHp}
-            黄豆:${this.curbullet}/${this.maxBullet}
-            风扇:${this.fanCnt}
-            塑料袋:${this.fanCnt}
-            FiringCnt:${this.firingCnt}`;
+生命:${this.curHp}/${this.maxHp}
+黄豆:${this.curbullet}/${this.maxBullet}
+风扇:${this.fanCnt}
+塑料袋:${this.fanCnt}
+FiringCnt:${this.firingCnt}`;
             this.debuglabel.string = text;
-
         }
     }
 }

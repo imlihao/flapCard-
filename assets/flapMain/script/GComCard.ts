@@ -31,6 +31,8 @@ export default class GComCard extends cc.Component {
     @property(cc.Sprite)
     cardFront: cc.Sprite;
 
+    card_compareStr: string;
+
     idx: number = -1;
 
     public initData(cardId: number, idx: number) {
@@ -45,6 +47,8 @@ export default class GComCard extends cc.Component {
      */
     private initDisplayWithData() {
         this.cardFront.spriteFrame = GameManager.inst.config.getCardSprById(this.cardId);
+        let [tp, param] = GameManager.inst.config.getCardEffect(this.cardId);
+        this.card_compareStr = E_CardStatus[tp] + "_" + param;
     }
 
     public changeStatus(newStat: E_CardStatus, playAni = true) {

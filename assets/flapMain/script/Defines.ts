@@ -14,8 +14,12 @@ export enum E_CardEffectType {
      * 
      */
     BULLET = 2,
+     /**
+     * 
+     */
+    FIRE = 2,
     /**
-   * 
-   */
+    * 
+    */
     BAG = 3
 }

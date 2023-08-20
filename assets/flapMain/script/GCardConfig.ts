@@ -18,31 +18,32 @@ export default class GCardConfig extends cc.Component {
     Bullet1: cc.SpriteFrame;
 
     @property(cc.Integer)
-    Bullet1MaxId: number;
+    Bullet1MaxId: number = 0;
 
     @property(cc.SpriteFrame)
-    bullet2: cc.SpriteFrame;
+    bullet2: cc.SpriteFrame = null;
 
     @property(cc.Integer)
-    bullet2MaxId: number;
+    bullet2MaxId: number = 0;
 
     @property(cc.SpriteFrame)
-    Fan: cc.SpriteFrame;
+    Fan: cc.SpriteFrame = null;
 
     @property(cc.Integer)
-    FanMaxId: number;
+    FanMaxId: number = 0;
 
     @property(cc.SpriteFrame)
-    Bag: cc.SpriteFrame;
+    Bag: cc.SpriteFrame = null;
 
     @property(cc.Integer)
-    BagMaxId: number;
+    BagMaxId: number = 0;
 
     @property(cc.SpriteFrame)
-    NONECard: cc.SpriteFrame;
+    NONECard: cc.SpriteFrame = null;
 
     @property(cc.Integer)
-    NONECardMaxId: number;
+    NONECardMaxId: number = 0;
+
 
     /**
      * 这张卡的附带的效果
@@ -58,7 +59,7 @@ export default class GCardConfig extends cc.Component {
         } else if (cardId <= this.BagMaxId) {
             return [E_CardEffectType.BAG, 0];
         } else {
-            return [E_CardEffectType.NONE, 0];
+            return [E_CardEffectType.FIRE, 0];
         }
     }
 
