@@ -236,6 +236,7 @@ export default class GameManager extends cc.Component {
     async FinishGame(winner: player, loser: player) {
         this.isStart = false;
         console.error(`${loser.name}输掉了了比赛`);
+        cc.director.loadScene("gameOver");
         //TODO: 动画
     }
 

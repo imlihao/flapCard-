@@ -30,3 +30,13 @@ export enum E_CardEffectType {
 export type EffectPair = [E_CardEffectType, number];
 
 export const CardPairSumCnt = 12;
+
+export enum GameType {
+    Self = 0,
+    Ai = 1,
+    Oppent = 1,
+}
+
+export class GameDifines {
+    static gameType: GameType = GameType.Self;
+};
