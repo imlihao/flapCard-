@@ -18,6 +18,7 @@ import player from "./Player";
 import PlayerData from "./PlayerData";
 import { LogUtil } from "./logUtil";
 import AiCom from "./AICom";
+import UIFinish from "./UIFinish";
 
 const { ccclass, property } = cc._decorator;
 
@@ -67,6 +68,9 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Integer)
     roundMaxTimeInSec: number = 0;
+
+    @property(UIFinish)
+    finishUI: UIFinish = null;
 
     public curRoundLeftTimeInSec: number;
 
@@ -179,9 +183,11 @@ export default class GameManager extends cc.Component {
      */
     public generateIds(maxPair: number) {
         const arr = new Array<number>(maxPair * 2);
-        for (let i = 0; i < maxPair; ++i) {
-            arr[i] = i + 1;
-            arr[i + maxPair] = i + 1;
+        let id = 1;
+        for (let i = 0; i < arr.length; i += 2) {
+            arr[i] = id;
+            arr[i + 1] = id;
+            id++;
         }
         LogUtil.log("generate ids:" + arr.toString());
         //乱序
@@ -255,7 +261,7 @@ export default class GameManager extends cc.Component {
                 } break;
                 case E_CardEffectType.BAG: {
                     await curPlayer.onGetBag();
-                }break;
+                } break;
                 case E_CardEffectType.FAN: {
                     await curPlayer.onGetFan();
                 } break;
@@ -284,11 +290,11 @@ export default class GameManager extends cc.Component {
         if (otherFiringCnt > 0) {
             if (curPlayer.fanCnt > 0) {//对方有子弹，自己有风扇
                 //这里会有动画同步问题？
-                 otherPlayer.onFartFinshed();
+                otherPlayer.onFartFinshed();
                 await curPlayer.onUseFan(otherFiringCnt);
             }
             else if (curPlayer.bagCnt > 0) { //对方有子弹，自己有袋子
-                 otherPlayer.onFartFinshed();
+                otherPlayer.onFartFinshed();
                 await curPlayer.onUseBag();
             } else { //对方有子弹，自己没有风扇和袋子
                 await otherPlayer.onFartFinshed();
@@ -304,30 +310,42 @@ export default class GameManager extends cc.Component {
         }
     }
 
-    async FinishGameWithWin(winner: player, loser: player) {
+    FinishGameWithWin(winner: player, loser: player) {
         this.isStart = false;
         console.error(`${winner.name}赢了`);
         console.error(`${loser.name}输掉了了比赛`);
-       
-        //TODO: 动画
+        let str = "";
+        if (GameDifines.gameType == GameType.Self) {
+            str = winner.name + "赢了";
+        } else if (GameDifines.gameType == GameType.Ai) {
+            if (winner.name == this.WhoAmI) {
+                str = "你赢了";
+            } else {
+                str = "你输了";
+            }
+        }
+        this.finishUI.onFinish(str);
+        //TODO: 动画    
     }
 
-    async FinishGameWithTie() {
+    FinishGameWithTie() {
         console.error(`平局`);
         cc.director.loadScene("GLoading", () => {
             console.log("load game scene");
         });
+        let str = "平局";
+        this.finishUI.onFinish(str);
         //TODO: 动画
     }
 
     async changeRound() {
-        let cnt =  this.getAllCanFlapCard().length;
+        let cnt = this.getAllCanFlapCard().length;
         if (this.shibaInuA.curHp <= 0 || this.shibaInuB.curHp <= 0) {
             let winner = this.shibaInuA.curHp > 0 ? this.shibaInuA : this.shibaInuB;
             let loser = this.shibaInuA.curHp > 0 ? this.shibaInuB : this.shibaInuA;
-            await this.FinishGameWithWin(winner, loser);
-        }else if (cnt <= 0) {
-            await this.FinishGameWithTie();
+            this.FinishGameWithWin(winner, loser);
+        } else if (cnt <= 0) {
+            this.FinishGameWithTie();
         } else {
             await Deferred.wait(400).promise;
             this.switchPlayer();

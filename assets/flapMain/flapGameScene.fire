@@ -1222,8 +1222,8 @@
     "debuglabel": {
       "__id__": 15
     },
-    "maxHp": 5,
-    "curHp": 5,
+    "maxHp": 3,
+    "curHp": 3,
     "maxBullet": 5,
     "curbullet": 3,
     "debug": {
@@ -1844,8 +1844,8 @@
     "debuglabel": {
       "__id__": 33
     },
-    "maxHp": 5,
-    "curHp": 5,
+    "maxHp": 3,
+    "curHp": 3,
     "maxBullet": 5,
     "curbullet": 3,
     "debug": {
@@ -2069,12 +2069,12 @@
       "__uuid__": "1745db90-0273-4510-b544-296a30b12fcf"
     },
     "FartCounOrder1": [
-      2,
-      1
+      1,
+      2
     ],
     "BeanCntOrder2": [
-      2,
-      1
+      1,
+      2
     ],
     "FanCntOrder3": 3,
     "BagCntOrder4": 3,
@@ -2237,7 +2237,7 @@
         "__id__": 65
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 76
@@ -2269,7 +2269,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        352.003,
         0,
         0,
         0,
@@ -2551,15 +2551,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        -3.352,
+        -274.897,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        3,
+        3,
         1
       ]
     },
@@ -2726,8 +2726,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "button",
-    "_N$string": "button",
+    "_string": "下一个",
+    "_N$string": "下一个",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -3037,6 +3037,9 @@
       "__id__": 53
     },
     "roundMaxTimeInSec": 30,
+    "finishUI": {
+      "__id__": 76
+    },
     "_id": "d8PCMfbSVPJJqSOm4ANpkm"
   },
   {

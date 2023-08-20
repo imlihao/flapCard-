@@ -27,7 +27,7 @@ export default class AiCom extends cc.Component {
 
         setTimeout(() => {
             this.doClk();
-        }, this.tinkingTimeInSec * 2000);
+        }, this.tinkingTimeInSec * 1000 + 100);
     }
 
     public doClk(): void {
