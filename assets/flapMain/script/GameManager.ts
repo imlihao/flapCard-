@@ -206,15 +206,15 @@ export default class GameManager extends cc.Component {
         if (otherFiringCnt > 0) {
             if (curPlayer.fanCnt > 0) {
                 //这里会有动画同步问题？
-                await Promise.race([
+                await Promise.all([
                     otherPlayer.onFireFinshed(),
                     curPlayer.onUseFan(otherFiringCnt)]);
             } else if (curPlayer.bagCnt > 0) {
-                await Promise.race([
+                await Promise.all([
                     otherPlayer.onFireFinshed(),
                     curPlayer.onUseBag()]);
             } else {
-                await Promise.race([
+                await Promise.all([
                     otherPlayer.onFireFinshed(),
                     curPlayer.onDamage(otherFiringCnt)]);
             }

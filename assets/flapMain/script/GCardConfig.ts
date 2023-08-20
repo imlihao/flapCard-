@@ -12,68 +12,49 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class GCardConfig extends cc.Component {
 
+    @property([cc.SpriteFrame])
+    Farts: [cc.SpriteFrame];
 
-
-    @property(cc.SpriteFrame)
-    Bullet1: cc.SpriteFrame;
-
-    @property(cc.Integer)
-    Bullet1MaxId: number = 0;
-
-    @property(cc.SpriteFrame)
-    bullet2: cc.SpriteFrame = null;
-
-    @property(cc.Integer)
-    bullet2MaxId: number = 0;
+    @property([cc.SpriteFrame])
+    Beans: [cc.SpriteFrame] = null;
 
     @property(cc.SpriteFrame)
     Fan: cc.SpriteFrame = null;
 
-    @property(cc.Integer)
-    FanMaxId: number = 0;
-
     @property(cc.SpriteFrame)
     Bag: cc.SpriteFrame = null;
-
-    @property(cc.Integer)
-    BagMaxId: number = 0;
 
     @property(cc.SpriteFrame)
     NONECard: cc.SpriteFrame = null;
 
+    @property([cc.Integer])
+    FartCount: number[] = [];
+
+    @property([cc.Integer])
+    BeanCnt: number[] = [];
+
     @property(cc.Integer)
-    NONECardMaxId: number = 0;
+    FanCnt: number = 0;
+
+    @property(cc.Integer)
+    BagCnt: number = 0;
+
+    @property(cc.Integer)
+    NONECardCnt: number = 0;
 
 
     /**
      * 这张卡的附带的效果
      */
-    public getCardEffect(cardId: number) {
-        //暂时先根据id区分 TODO: 走配置
-        if (cardId <= this.Bullet1MaxId) {
-            return [E_CardEffectType.BULLET, 1];
-        } else if (cardId <= this.bullet2MaxId) {
-            return [E_CardEffectType.BULLET, 2];
-        } else if (cardId <= this.FanMaxId) {
-            return [E_CardEffectType.FAN, 0];
-        } else if (cardId <= this.BagMaxId) {
-            return [E_CardEffectType.BAG, 0];
-        } else {
-            return [E_CardEffectType.FIRE, 0];
-        }
+    public getCardEffect(cardId: number): [E_CardEffectType, number] {
+        return [E_CardEffectType.NONE, 0];
     }
 
     public getCardSprById(cardId: number): cc.SpriteFrame {
-        if (cardId <= this.Bullet1MaxId) {
-            return this.Bullet1;
-        } else if (cardId <= this.bullet2MaxId) {
-            return this.bullet2;
-        } else if (cardId <= this.FanMaxId) {
-            return this.Fan;
-        } else if (cardId <= this.BagMaxId) {
-            return this.Bag;
-        } else {
-            return this.NONECard;
-        }
+        return this.NONECard;
+    }
+
+    public getCardSprByEffect(effECT: [E_CardEffectType, number]): cc.SpriteFrame {
+        return this.NONECard;
     }
 }
