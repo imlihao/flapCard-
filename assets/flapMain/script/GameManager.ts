@@ -162,7 +162,7 @@ export default class GameManager extends cc.Component {
         for (let i = 0; i < this.idArr.length; ++i) {
             let cardNode = cc.instantiate(this.cardPfb);
             cardNode.getComponent(GComCard).initData(this.idArr[i], i);
-            LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
+            // LogUtil.log("instantiate card: " + i + " __ " + this.idArr[i]);
             this.cardNodes.push(cardNode);
             this.cardContainer.addChild(cardNode);
         }

@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { E_CardStatus, EffectPair } from "./Defines";
+import { E_CardEffectType, E_CardStatus, EffectPair } from "./Defines";
 import GameManager from "./GameManager";
 
 const { ccclass, property } = cc._decorator;
@@ -51,7 +51,9 @@ export default class GComCard extends cc.Component {
     private initDisplayWithData() {
         let [tp, param] = this.myEffect = GameManager.inst.config.getCardEffect(this.cardId);
         this.cardFront.spriteFrame = GameManager.inst.config.getCardSprByEffect(this.myEffect);
-        this.card_compareStr = E_CardStatus[tp] + "_" + param;
+        this.card_compareStr = E_CardEffectType[tp] + "_" + param;
+        this.cardLog(`EFFECT:   ${this.card_compareStr}`);
+
     }
 
     public changeStatus(newStat: E_CardStatus, playAni = true) {
@@ -91,7 +93,6 @@ export default class GComCard extends cc.Component {
     }
 
     start() {
-        this.cardLog("add click")
         this.node.on(cc.Node.EventType.TOUCH_END, this.onCardClk, this);
     }
 

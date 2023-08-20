@@ -17,11 +17,11 @@ export enum E_CardEffectType {
     /**
     * 
     */
-    FART = 2,
+    FART = 3,
     /**
     * 
     */
-    BAG = 3
+    BAG = 4
 }
 
 /**
