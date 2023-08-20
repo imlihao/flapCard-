@@ -13,15 +13,18 @@ export enum E_CardEffectType {
     /**
      * 
      */
-    BULLET = 2,
+    BEAN = 2,
     /**
     * 
     */
-    FIRE = 2,
+    FART = 2,
     /**
     * 
     */
     BAG = 3
 }
 
+/**
+ * 卡片效果
+ */
 export type EffectPair = [E_CardEffectType, number];

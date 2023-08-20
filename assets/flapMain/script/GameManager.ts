@@ -175,7 +175,7 @@ export default class GameManager extends cc.Component {
                 case E_CardEffectType.FAN: {
                     await curPlayer.onGetFan();
                 } break;
-                case E_CardEffectType.BULLET: {
+                case E_CardEffectType.BEAN: {
                     await curPlayer.onFire(param);
                 } break;
                 case E_CardEffectType.BAG: {
