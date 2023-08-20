@@ -53,7 +53,10 @@ export default class GComCard extends cc.Component {
     private initDisplayWithData() {
         let [tp, param] = this.myEffect = GameManager.inst.config.getCardEffect(this.cardId);
         this.cardFront.spriteFrame = GameManager.inst.config.getCardSprByEffect(this.myEffect);
-        this.card_compareStr = E_CardEffectType[tp] + "_" + param;
+        this.card_compareStr = E_CardEffectType[tp];
+        if (param > 0) {
+            this.card_compareStr += `_${param}`;
+        }
         this.cardLog(`EFFECT:   ${this.card_compareStr}`);
 
     }
