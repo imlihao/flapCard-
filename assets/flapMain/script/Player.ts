@@ -5,7 +5,10 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import AniState from "./AniState";
+import AniStateFart from "./AniStateFart";
 import { Deferred } from "./Deferred";
+import { E_ANIMATION_Fart, E_ANIMATION_Player } from "./Defines";
 import { LogUtil } from "./logUtil";
 
 const { ccclass, property } = cc._decorator;
@@ -33,6 +36,12 @@ export default class player extends cc.Component {
 
     @property([cc.Node])
     gas: cc.Node[] = [];
+
+    @property(AniState)
+    mainState: AniState = null;
+    @property(AniStateFart)
+    fartState: AniStateFart = null;
+
 
     public legalRound: number = 0;
     public firingCnt: number = 0;
@@ -64,7 +73,8 @@ export default class player extends cc.Component {
     async onAddBeans(bullet: number) {
         let realAdd = Math.max(this.maxBullet - this.curbullet, bullet);
         this.curbullet += realAdd;
-        await Deferred.wait(400).promise;
+        await this.mainState.changeState(E_ANIMATION_Player.bean, realAdd);
+        await Deferred.wait(100).promise;
         //TODO:动画
     }
 
@@ -73,7 +83,8 @@ export default class player extends cc.Component {
      */
     async onDamage(dHp: number) {
         this.curHp -= dHp;
-        await Deferred.wait(400).promise;
+        await this.mainState.changeState(E_ANIMATION_Player.Hit, dHp);
+        await Deferred.wait(100).promise;
         //TODO:同步生命动画
     }
 
@@ -86,7 +97,8 @@ export default class player extends cc.Component {
     async onUseFan(OtherFiringCnt: number) {
         //TODO: 播放拿出风扇的动画
         this.fanCnt = 0;
-        await Deferred.wait(400).promise;
+        await this.mainState.changeState(E_ANIMATION_Player.fan, 0);
+        await Deferred.wait(100).promise;
         await this.onFart(OtherFiringCnt);
     }
 
@@ -103,7 +115,8 @@ export default class player extends cc.Component {
     async onUseBag() {
         //TODO: 播放拿出塑料袋的动画
         this.bagCnt = 0;
-        await Deferred.wait(400).promise;
+        await this.mainState.changeState(E_ANIMATION_Player.bag, 0);
+        await Deferred.wait(100).promise;
     }
 
     async onWasteBag() {
@@ -115,8 +128,9 @@ export default class player extends cc.Component {
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
             this.firingCnt = legalCnt;
-            let sta = this.getComponent(cc.Animation).play("放屁");
-            await Deferred.waitAnimationFinished(sta).promise;
+            await this.mainState.changeState(E_ANIMATION_Player.fart, legalCnt);
+            await this.fartState.changeState(E_ANIMATION_Fart.firstFart, legalCnt);
+            await Deferred.wait(100).promise;
             return true;
         } else {
             //TODO: 子弹不足是否也要动画
@@ -125,8 +139,10 @@ export default class player extends cc.Component {
     }
 
     async onFartFinshed() {
+        let cnt = this.firingCnt;
         this.firingCnt = 0;
-        await Deferred.wait(400).promise;
+        await this.fartState.changeState(E_ANIMATION_Fart.SecondFartHitted, cnt);
+        await Deferred.wait(100).promise;
     }
 
     update(dt) {

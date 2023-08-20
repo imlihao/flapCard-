@@ -42,6 +42,9 @@ export default class AniState extends cc.Component {
     @property(cc.Prefab)
     idlePfb: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    hitPfb: cc.Prefab = null;
+
 
     @property(cc.Animation)
     fartNode: cc.Animation = null;
@@ -57,6 +60,9 @@ export default class AniState extends cc.Component {
 
     @property(cc.Animation)
     idle: cc.Animation = null;
+
+    @property(cc.Animation)
+    hit: cc.Animation = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -74,13 +80,17 @@ export default class AniState extends cc.Component {
         this.bag.node.parent = this.node;
         this.idle = cc.instantiate(this.idlePfb).getComponent(cc.Animation);
         this.idle.node.parent = this.node;
-        
+        this.hit = cc.instantiate(this.hitPfb).getComponent(cc.Animation);
+        this.hit.node.parent = this.node;
+
         let map = this.mp = new Map<E_ANIMATION_Player, cc.Animation>();
         map.set(E_ANIMATION_Player.idle, this.idle);
         map.set(E_ANIMATION_Player.fart, this.fartNode);
         map.set(E_ANIMATION_Player.bean, this.beanNode);
         map.set(E_ANIMATION_Player.fan, this.Fan);
         map.set(E_ANIMATION_Player.bag, this.bag);
+        map.set(E_ANIMATION_Player.Hit, this.hit);
+
         map.forEach((ani) => {
             ani.node.active = false;
         })
@@ -101,7 +111,7 @@ export default class AniState extends cc.Component {
         this.idle.play();
     }
 
-    async changeState(state: E_ANIMATION_Player) {
+    async changeState(state: E_ANIMATION_Player,param:number) {
         if (this.myState == state) {
             return;
         }

@@ -48,6 +48,7 @@ export enum E_ANIMATION_Player {
     bean = 2,
     fan = 3,
     bag = 4,
+    Hit = 5,
 }
 
 export enum E_ANIMATION_Fart {
