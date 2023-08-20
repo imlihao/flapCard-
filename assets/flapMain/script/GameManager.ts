@@ -176,7 +176,7 @@ export default class GameManager extends cc.Component {
                     await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.BEAN: {
-                    await curPlayer.onFire(param);
+                    await curPlayer.onFart(param);
                 } break;
                 case E_CardEffectType.BAG: {
                     await curPlayer.onGetFan();
@@ -207,15 +207,15 @@ export default class GameManager extends cc.Component {
             if (curPlayer.fanCnt > 0) {
                 //这里会有动画同步问题？
                 await Promise.all([
-                    otherPlayer.onFireFinshed(),
+                    otherPlayer.onFartFinshed(),
                     curPlayer.onUseFan(otherFiringCnt)]);
             } else if (curPlayer.bagCnt > 0) {
                 await Promise.all([
-                    otherPlayer.onFireFinshed(),
+                    otherPlayer.onFartFinshed(),
                     curPlayer.onUseBag()]);
             } else {
                 await Promise.all([
-                    otherPlayer.onFireFinshed(),
+                    otherPlayer.onFartFinshed(),
                     curPlayer.onDamage(otherFiringCnt)]);
             }
         } else {

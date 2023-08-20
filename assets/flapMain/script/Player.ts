@@ -50,7 +50,7 @@ export default class player extends cc.Component {
     }
 
     /**
-     * 
+     * 暂时不知道效果
      * @param addCnt 
      */
     async onAddHp(addCnt: number) {
@@ -61,7 +61,7 @@ export default class player extends cc.Component {
      * 
      * @param bullet 
      */
-    async onAddBullet(bullet: number) {
+    async onAddBeans(bullet: number) {
         let realAdd = Math.max(this.maxBullet - this.curbullet, bullet);
         this.curbullet += realAdd;
         await Deferred.wait(400).promise;
@@ -87,7 +87,7 @@ export default class player extends cc.Component {
         //TODO: 播放拿出风扇的动画
         this.fanCnt = 0;
         await Deferred.wait(400).promise;
-        await this.onFire(OtherFiringCnt);
+        await this.onFart(OtherFiringCnt);
     }
 
     async onWasteFan() {
@@ -110,8 +110,8 @@ export default class player extends cc.Component {
         this.bagCnt = 0;
     }
 
-    async onFire(cnt: number): Promise<boolean> {
-        let legalCnt = Math.min(cnt, this.curbullet);
+    async onFart(fartCnt: number): Promise<boolean> {
+        let legalCnt = Math.min(fartCnt, this.curbullet);
         if (legalCnt > 0) {
             LogUtil.log("fireBullet");
             this.firingCnt = legalCnt;
@@ -124,7 +124,7 @@ export default class player extends cc.Component {
         }
     }
 
-    async onFireFinshed() {
+    async onFartFinshed() {
         this.firingCnt = 0;
         await Deferred.wait(400).promise;
     }
