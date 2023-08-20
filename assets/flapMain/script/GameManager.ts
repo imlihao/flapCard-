@@ -172,13 +172,16 @@ export default class GameManager extends cc.Component {
             LogUtil.log(`${this.curMovingPlayer}: card:${this.inComeFlapCard.cardId},Effect:${E_CardEffectType[cardEffec]},${param}`)
             const curPlayer = this.getCurPlayer();
             switch (cardEffec) {
-                case E_CardEffectType.FAN: {
-                    await curPlayer.onGetFan();
-                } break;
                 case E_CardEffectType.BEAN: {
                     await curPlayer.onFart(param);
                 } break;
+                case E_CardEffectType.FART: {
+                    await curPlayer.onFart(param);
+                } break;
                 case E_CardEffectType.BAG: {
+                    await curPlayer.onGetFan();
+                }
+                case E_CardEffectType.FAN: {
                     await curPlayer.onGetFan();
                 } break;
                 case E_CardEffectType.NONE: {
