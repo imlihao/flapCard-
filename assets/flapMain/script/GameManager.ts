@@ -186,7 +186,7 @@ export default class GameManager extends cc.Component {
         LogUtil.log("generate ids:" + arr.toString());
         //乱序
         // this.idArr = shuffleArray<number>(arr);
-         //NO乱序
+        //NO乱序
         this.idArr = arr;
         LogUtil.log("after shuffleArray:" + arr.toString());
     }
@@ -256,7 +256,7 @@ export default class GameManager extends cc.Component {
                     await curPlayer.onFart(param);
                 } break;
                 case E_CardEffectType.BAG: {
-                    await curPlayer.onGetFan();
+                    await curPlayer.onGetBag();
                 }
                 case E_CardEffectType.FAN: {
                     await curPlayer.onGetFan();
@@ -284,16 +284,17 @@ export default class GameManager extends cc.Component {
         //播放子弹动画
         const otherFiringCnt = otherPlayer.firingCnt;
         if (otherFiringCnt > 0) {
-            if (curPlayer.fanCnt > 0) {
+            if (curPlayer.fanCnt > 0) {//对方有子弹，自己有风扇
                 //这里会有动画同步问题？
                 await Promise.all([
                     otherPlayer.onFartFinshed(),
                     curPlayer.onUseFan(otherFiringCnt)]);
-            } else if (curPlayer.bagCnt > 0) {
+            }
+            else if (curPlayer.bagCnt > 0) { //对方有子弹，自己有袋子
                 await Promise.all([
                     otherPlayer.onFartFinshed(),
                     curPlayer.onUseBag()]);
-            } else {
+            } else { //对方有子弹，自己没有风扇和袋子
                 await Promise.all([
                     otherPlayer.onFartFinshed(),
                     curPlayer.onDamage(otherFiringCnt)]);
