@@ -3,7 +3,7 @@
   "_name": "fartStart",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.6666666666666666,
+  "_duration": 0.3,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -17,8 +17,8 @@
               "value": 0
             },
             {
-              "frame": 0.6666666666666666,
-              "value": 336
+              "frame": 0.3,
+              "value": 207.346
             }
           ]
         }
@@ -31,8 +31,8 @@
               "value": 0
             },
             {
-              "frame": 0.6666666666666666,
-              "value": 410
+              "frame": 0.3,
+              "value": 175.666
             }
           ]
         }

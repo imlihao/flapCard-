@@ -1233,8 +1233,12 @@
       null,
       null
     ],
-    "mainState": null,
-    "fartState": null,
+    "mainState": {
+      "__id__": 18
+    },
+    "fartState": {
+      "__id__": 21
+    },
     "_id": "57z08gextL8py9q5s/JNfE"
   },
   {

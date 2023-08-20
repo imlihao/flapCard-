@@ -69,7 +69,7 @@ export default class AniState extends cc.Component {
     // onLoad () {}
 
     private mp: Map<E_ANIMATION_Player, cc.Animation> = null;
-    onStart() {
+    start() {
         this.fartNode = cc.instantiate(this.fartPfb).getComponent(cc.Animation);
         this.fartNode.node.parent = this.node;
         this.beanNode = cc.instantiate(this.beanPfb).getComponent(cc.Animation);
@@ -115,12 +115,12 @@ export default class AniState extends cc.Component {
         if (this.myState == state) {
             return;
         }
-        if (this.myState != E_ANIMATION_Player.idle) {
+        if (state != E_ANIMATION_Player.idle) {
             this.myState = state;
             this.makeNodeFitState();
             let targetSta = this.mp.get(this.myState);
-            let sta = targetSta.play();
-            await Deferred.waitAnimationFinished(sta);
+            let sta = targetSta.play(targetSta.getClips()[0].name);
+            await Deferred.waitAnimationFinished(sta).promise;
         }
         this.backToIdle();
     }

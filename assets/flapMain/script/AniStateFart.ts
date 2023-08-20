@@ -36,7 +36,7 @@ export default class AniStateFart extends cc.Component {
     private fartCnt: number = 0;
 
     private mp: Map<E_ANIMATION_Fart, cc.Animation> = null;
-    onStart() {
+    start() {
         this.Fart = cc.instantiate(this.fartPfb).getComponent(cc.Animation);
         this.Fart.node.parent = this.node;
         this.fart1 = this.Fart.node.getChildByName("fart1");
@@ -51,6 +51,7 @@ export default class AniStateFart extends cc.Component {
     }
 
     private backToIdle() {
+        this.fartCnt = 0;
         this.myState = E_ANIMATION_Fart.normal;
         this.makeNodeFitState();
     }
@@ -60,7 +61,7 @@ export default class AniStateFart extends cc.Component {
             return;
         }
         this.fartCnt = fartCnt;
-        if (this.myState != E_ANIMATION_Fart.normal) {
+        if (state != E_ANIMATION_Fart.normal) {
             this.myState = state;
             this.makeNodeFitState();
             if (this.myState == E_ANIMATION_Fart.firstFart) {
