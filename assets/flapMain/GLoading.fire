@@ -1100,7 +1100,7 @@
     },
     "component": "",
     "_componentId": "86438SChfVOKL6bkz32FhC0",
-    "handler": "onStratSelf",
+    "handler": "onStratAI",
     "customEventData": ""
   },
   {

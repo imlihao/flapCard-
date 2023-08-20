@@ -57,10 +57,10 @@ export default class GameManager extends cc.Component {
     shibaBDis: cc.Node;
 
     @property(GCardConfig)
-    config: GCardConfig;
+    config: GCardConfig = null;
 
     @property(AiCom)
-    AICom: AiCom;
+    AICom: AiCom = null;
 
     @property(cc.Integer)
     roundMaxTimeInSec: number = 0;

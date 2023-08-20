@@ -21,10 +21,13 @@
     "_components": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 3
+      "__id__": 4
     },
     "_opacity": 255,
     "_color": {
@@ -117,6 +120,17 @@
     "FanCntOrder3": 3,
     "BagCntOrder4": 3,
     "NONECardCnt": 3,
+    "_id": ""
+  },
+  {
+    "__type__": "1e111o24tJPWrHMMmFg1ACf",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "tinkingTimeInSec": 1,
     "_id": ""
   },
   {
