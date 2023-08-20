@@ -41,6 +41,8 @@ export default class AniStateFart extends cc.Component {
         this.Fart.node.parent = this.node;
         this.fart1 = this.Fart.node.getChildByName("fart1");
         this.fart2 = this.Fart.node.getChildByName("fart2");
+        this.fartCnt = 0;
+        this.makeNodeFitState();
     }
 
     private myState: E_ANIMATION_Fart = E_ANIMATION_Fart.normal;

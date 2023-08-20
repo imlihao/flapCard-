@@ -215,9 +215,6 @@ export default class GameManager extends cc.Component {
                 canFlapCards.push(card);
             }
         }
-        if (canFlapCards.length == 0) {
-            return null;
-        }
         return canFlapCards;
     }
 
@@ -287,7 +284,7 @@ export default class GameManager extends cc.Component {
         if (otherFiringCnt > 0) {
             if (curPlayer.fanCnt > 0) {//对方有子弹，自己有风扇
                 //这里会有动画同步问题？
-                await otherPlayer.onFartFinshed();
+                 otherPlayer.onFartFinshed();
                 await curPlayer.onUseFan(otherFiringCnt);
             }
             else if (curPlayer.bagCnt > 0) { //对方有子弹，自己有袋子
@@ -307,10 +304,16 @@ export default class GameManager extends cc.Component {
         }
     }
 
-    async FinishGame(winner: player, loser: player) {
+    async FinishGameWithWin(winner: player, loser: player) {
         this.isStart = false;
         console.error(`${winner.name}赢了`);
         console.error(`${loser.name}输掉了了比赛`);
+       
+        //TODO: 动画
+    }
+
+    async FinishGameWithTie() {
+        console.error(`平局`);
         cc.director.loadScene("GLoading", () => {
             console.log("load game scene");
         });
@@ -318,10 +321,13 @@ export default class GameManager extends cc.Component {
     }
 
     async changeRound() {
+        let cnt =  this.getAllCanFlapCard().length;
         if (this.shibaInuA.curHp <= 0 || this.shibaInuB.curHp <= 0) {
             let winner = this.shibaInuA.curHp > 0 ? this.shibaInuA : this.shibaInuB;
             let loser = this.shibaInuA.curHp > 0 ? this.shibaInuB : this.shibaInuA;
-            await this.FinishGame(winner, loser);
+            await this.FinishGameWithWin(winner, loser);
+        }else if (cnt <= 0) {
+            await this.FinishGameWithTie();
         } else {
             await Deferred.wait(400).promise;
             this.switchPlayer();
