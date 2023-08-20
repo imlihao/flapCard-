@@ -28,3 +28,5 @@ export enum E_CardEffectType {
  * 卡片效果
  */
 export type EffectPair = [E_CardEffectType, number];
+
+export const CardPairSumCnt = 12;
