@@ -10,7 +10,7 @@
  */
 
 import { Deferred } from "./Deferred";
-import { E_CardEffectType, E_CardStatus } from "./Defines";
+import { E_CardEffectType, E_CardStatus, GameDifines, GameType } from "./Defines";
 import GCardConfig from "./GCardConfig";
 import GComCard from "./GComCard";
 import { shuffleArray } from "./MathUtil";
@@ -81,6 +81,13 @@ export default class GameManager extends cc.Component {
 
     private lockClk: boolean;
 
+    public WhoAmI: "shibaInuA" | "shibaInuB";
+
+    public WhoIsAi: "shibaInuA" | "shibaInuB";
+
+    public WhoIsMyOpponent: "shibaInuA" | "shibaInuB";
+
+
     public get isClkLocked() {
         return this.lockClk || !this.isStart;
     }
@@ -108,9 +115,38 @@ export default class GameManager extends cc.Component {
         this.initData();
     }
 
+    canIClk(isAi: boolean = false) {
+        if (GameDifines.gameType == GameType.Self) {
+            return true;
+        } else if (GameDifines.gameType == GameType.Ai) {
+            if (isAi) {
+                return this.curMovingPlayer == this.WhoIsAi;
+            } else {
+                return this.curMovingPlayer == this.WhoAmI;
+            }
+        } else {
+            return this.curMovingPlayer == this.WhoIsAi;
+        }
+    }
+
     initData() {
         this.shibaInuA.name = "shibaInuA";
         this.shibaInuB.name = "shibaInuB";
+        if (GameDifines.gameType == GameType.Self) {
+
+        } else if (GameDifines.gameType == GameType.Ai) {
+            let ran = Math.random();
+            if (ran > 0.5) {
+                this.WhoAmI = "shibaInuA";
+                this.WhoIsAi = "shibaInuB";
+                this.WhoIsMyOpponent = "shibaInuB";
+            } else {
+                this.WhoAmI = "shibaInuA";
+                this.WhoIsAi = "shibaInuB";
+                this.WhoIsMyOpponent = "shibaInuB";
+            }
+        }
+
         //初始化拍组
         this.generateIds(this.maxPair);
         this.cardNodes = [];
@@ -237,7 +273,7 @@ export default class GameManager extends cc.Component {
         this.isStart = false;
         console.error(`${winner.name}赢了`);
         console.error(`${loser.name}输掉了了比赛`);
-        cc.director.loadScene("GLoading",()=>{
+        cc.director.loadScene("GLoading", () => {
             console.log("load game scene");
         });
         //TODO: 动画
