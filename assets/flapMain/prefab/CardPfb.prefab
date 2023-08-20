@@ -30,14 +30,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 16
       },
       {
-        "__id__": 16
+        "__id__": 17
       }
     ],
     "_prefab": {
-      "__id__": 17
+      "__id__": 18
     },
     "_opacity": 255,
     "_color": {
@@ -461,23 +461,26 @@
     "_components": [
       {
         "__id__": 13
+      },
+      {
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 15
     },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 61,
-      "g": 232,
-      "b": 160,
+      "r": 7,
+      "g": 249,
+      "b": 147,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 33.37,
-      "height": 50.4
+      "width": 42.04,
+      "height": 52.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -530,7 +533,7 @@
     "_dstBlendFactor": 771,
     "_string": "123",
     "_N$string": "123",
-    "_fontSize": 20,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -544,6 +547,24 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.LabelOutline",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 172,
+      "g": 5,
+      "b": 5,
+      "a": 255
+    },
+    "_width": 1,
     "_id": ""
   },
   {

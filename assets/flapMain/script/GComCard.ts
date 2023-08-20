@@ -102,7 +102,7 @@ export default class GComCard extends cc.Component {
         if (this.debug) {
             this.debug.string = `
 ${this.card_compareStr}
-status:${E_CardStatus[this.status]}`;
+${E_CardStatus[this.status]}`;
         }
     }
 
