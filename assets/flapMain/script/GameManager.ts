@@ -137,8 +137,9 @@ export default class GameManager extends cc.Component {
         this.shibaInuA.name = "shibaInuA";
         this.shibaInuB.name = "shibaInuB";
         if (GameDifines.gameType == GameType.Self) {
-
+            console.error("对手是自己");
         } else if (GameDifines.gameType == GameType.Ai) {
+            console.error("对手是AI");
             this.AICom.node.active = true;
             let ran = Math.random();
             // if (ran > 0.5) {
