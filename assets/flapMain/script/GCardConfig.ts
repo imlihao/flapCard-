@@ -44,7 +44,7 @@ export default class GCardConfig extends cc.Component {
 
 
     private effectMap: Map<Number, EffectPair>;
-    onStart() {
+    onLoad() {
         this.effectMap = new Map<Number, EffectPair>();
         let id = 1;
         for (let i = 0; i < this.FartCounOrder1.length; i++) {
@@ -87,7 +87,8 @@ export default class GCardConfig extends cc.Component {
 
     public getCardSprById(cardId: number): cc.SpriteFrame {
         let Effect = this.effectMap.get(cardId);
-        return this.getCardSprByEffect(Effect);
+        let spf = this.getCardSprByEffect(Effect);
+        return spf;
     }
 
     public getCardSprByEffect(effECT: [E_CardEffectType, number]): cc.SpriteFrame {

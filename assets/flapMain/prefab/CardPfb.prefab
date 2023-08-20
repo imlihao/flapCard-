@@ -478,6 +478,9 @@
     },
     "_enabled": true,
     "cardId": 0,
+    "cardFront": {
+      "__id__": 9
+    },
     "_id": ""
   },
   {

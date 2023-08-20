@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { E_CardStatus } from "./Defines";
+import { E_CardStatus, EffectPair } from "./Defines";
 import GameManager from "./GameManager";
 
 const { ccclass, property } = cc._decorator;
@@ -35,6 +35,9 @@ export default class GComCard extends cc.Component {
 
     idx: number = -1;
 
+
+    public myEffect: EffectPair;
+
     public initData(cardId: number, idx: number) {
         this.cardId = cardId;
         this.idx = idx;
@@ -46,8 +49,8 @@ export default class GComCard extends cc.Component {
      * 根据id颜色展示
      */
     private initDisplayWithData() {
-        this.cardFront.spriteFrame = GameManager.inst.config.getCardSprById(this.cardId);
-        let [tp, param] = GameManager.inst.config.getCardEffect(this.cardId);
+        let [tp, param] = this.myEffect = GameManager.inst.config.getCardEffect(this.cardId);
+        this.cardFront.spriteFrame = GameManager.inst.config.getCardSprByEffect(this.myEffect);
         this.card_compareStr = E_CardStatus[tp] + "_" + param;
     }
 
