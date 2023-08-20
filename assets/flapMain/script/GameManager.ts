@@ -253,11 +253,12 @@ export default class GameManager extends cc.Component {
                     await curPlayer.onFart(param);
                 } break;
                 case E_CardEffectType.FART: {
+                    await this.SettleRound();
                     await curPlayer.onFart(param);
                 } break;
                 case E_CardEffectType.BAG: {
                     await curPlayer.onGetBag();
-                }
+                }break;
                 case E_CardEffectType.FAN: {
                     await curPlayer.onGetFan();
                 } break;
@@ -286,18 +287,15 @@ export default class GameManager extends cc.Component {
         if (otherFiringCnt > 0) {
             if (curPlayer.fanCnt > 0) {//对方有子弹，自己有风扇
                 //这里会有动画同步问题？
-                await Promise.all([
-                    otherPlayer.onFartFinshed(),
-                    curPlayer.onUseFan(otherFiringCnt)]);
+                await otherPlayer.onFartFinshed();
+                await curPlayer.onUseFan(otherFiringCnt);
             }
             else if (curPlayer.bagCnt > 0) { //对方有子弹，自己有袋子
-                await Promise.all([
-                    otherPlayer.onFartFinshed(),
-                    curPlayer.onUseBag()]);
+                await otherPlayer.onFartFinshed();
+                await curPlayer.onUseBag();
             } else { //对方有子弹，自己没有风扇和袋子
-                await Promise.all([
-                    otherPlayer.onFartFinshed(),
-                    curPlayer.onDamage(otherFiringCnt)]);
+                await otherPlayer.onFartFinshed();
+                await curPlayer.onDamage(otherFiringCnt);
             }
         } else {
             if (curPlayer.fanCnt > 0) {

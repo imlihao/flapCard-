@@ -3,7 +3,7 @@
   "_name": "bag",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.18333333333333332,
+  "_duration": 0.48333333333333334,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -68,13 +68,13 @@
                 }
               },
               {
-                "frame": 0.15,
+                "frame": 0.45,
                 "value": {
                   "__uuid__": "eafc1540-446f-4222-aae0-8b512ffed843"
                 }
               },
               {
-                "frame": 0.16666666666666666,
+                "frame": 0.4666666666666667,
                 "value": {
                   "__uuid__": "b79066b1-2743-43c5-98f5-fc60ee73160b"
                 }
