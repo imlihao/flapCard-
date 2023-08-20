@@ -40,3 +40,20 @@ export enum GameType {
 export class GameDifines {
     static gameType: GameType = GameType.Self;
 };
+
+
+export enum E_ANIMATION_Player {
+    idle = 0,
+    fart = 1,
+    bean = 2,
+    fan = 3,
+    bag = 4,
+}
+
+export enum E_ANIMATION_Fart {
+    normal = 0,
+    firstFart = 1,
+    SecondFartBlocked = 2,
+    SecondFartReturned = 3,
+    SecondFartHitted = 4,
+}
