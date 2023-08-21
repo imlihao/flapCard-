@@ -1112,8 +1112,8 @@
     "debuglabel": {
       "__id__": 15
     },
-    "maxHp": 3,
-    "curHp": 3,
+    "maxHp": 5,
+    "curHp": 5,
     "maxBullet": 5,
     "curbullet": 3,
     "debug": {
@@ -1624,8 +1624,8 @@
     "debuglabel": {
       "__id__": 30
     },
-    "maxHp": 3,
-    "curHp": 3,
+    "maxHp": 5,
+    "curHp": 5,
     "maxBullet": 5,
     "curbullet": 3,
     "debug": {
