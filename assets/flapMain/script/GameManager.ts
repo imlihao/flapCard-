@@ -278,6 +278,7 @@ export default class GameManager extends cc.Component {
         }
         this.lastFlapCard = null;
         this.inComeFlapCard = null;
+        
         await Deferred.wait(400).promise;
     }
 
