@@ -1,5 +1,5 @@
 import { WsClient } from 'tsrpc-miniapp';
-import { serviceProto } from './shared/protocols/serviceProto';
+import { serviceProto } from './protocols/serviceProto';
 
 // 创建客户端
 export const client = new WsClient(serviceProto, {
