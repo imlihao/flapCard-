@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { HttpClient } from "tsrpc-miniapp";
-import { apiClient } from "../tsrpcSrc/tsrpcHttp";
+import { apiClient } from "../../tsrpcSrc/tsrpcHttp";
 
 const {ccclass, property} = cc._decorator;
 
