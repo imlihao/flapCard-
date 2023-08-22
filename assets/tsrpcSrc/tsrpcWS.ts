@@ -1,9 +1,9 @@
-import { WsClient } from 'tsrpc-miniapp';
+import { WsClient } from 'tsrpc-browser';
 import { serviceProto } from './protocols/serviceProto';
 
 // 创建客户端
 export const client = new WsClient(serviceProto, {
-  server: 'wss://xxx.com/api',
+  server: 'ws://127.0.0.1:3000',
   json: true,
 });
 

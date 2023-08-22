@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chalk": "^5.3.0",
+    "tsrpc-browser": "^3.4.13",
     "tsrpc-miniapp": "^3.4.13"
   }
 }
